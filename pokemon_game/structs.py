@@ -278,3 +278,11 @@ def calculate_stats(P:Pokemon, evs:List[int], ivs:List[int]) -> Stats:
         i += 1
 
     return Stats(hp, cal[0], cal[1], cal[2], cal[3], cal[4])
+
+#Comprobar si esto funciona
+def packed_str_to_pokemon_set(packed : str) -> PokemonSet:
+    a = packed.split('|')
+    m = a[4].split(',')
+    e = a[6].split(',')
+    i = a[8].split(',')
+    poke = PokemonSet(a[0], a[1], a[2], a[3], m, a[5], e, a[7], i, a[9], a[10], a[11])

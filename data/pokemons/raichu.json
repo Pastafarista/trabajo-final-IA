@@ -1,0 +1,12 @@
+{
+    "species": "raichu",
+    "item": "lifeorb",
+    "ability": "lightningrod",
+    "nature": "timid",
+    "moves": ["nastyplot", "thunderbolt", "focusblast", "hiddenpowerice"],
+    "evs": [0, 0, 0, 252, 4, 252],
+    "ivs": [31, 31, 31, 31, 31, 31],
+    "gender": "female",
+    "level": 100,
+    "shiny": true
+}

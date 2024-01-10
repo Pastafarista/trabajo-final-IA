@@ -1,0 +1,12 @@
+{
+    "species": "chandelure",
+    "item": "leftovers",
+    "ability": "flashfire",
+    "nature": "timid",
+    "moves": ["substitute", "calmmind", "shadowball", "flamethrower"],
+    "evs": [0, 0, 4, 252, 0, 252],
+    "ivs": [31, 31, 31, 31, 31, 31],
+    "gender": "female",
+    "level": 100,
+    "shiny": true
+} 

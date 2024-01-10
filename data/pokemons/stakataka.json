@@ -1,0 +1,12 @@
+{
+    "species": "stakataka",
+    "item": "leftovers",
+    "ability": "beastboost",
+    "nature": "sassy",
+    "moves": ["gyroball", "rockblast", "stealthrock", "toxic"],
+    "evs": [252, 0, 4, 0, 252, 0],
+    "ivs": [31, 31, 31, 31, 31, 31],
+    "gender": "",
+    "level": 100,
+    "shiny": true
+}

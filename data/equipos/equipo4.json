@@ -1,0 +1,36 @@
+[
+    {
+        "species": "bisharp",
+        "item": "dreadplate",
+        "ability": "justified",
+        "nature": "adamant",
+        "moves": ["swordsdance", "knockoff", "ironhead", "suckerpunch"],
+        "evs": [0, 252, 0, 0, 4, 252],
+        "ivs": [31, 31, 31, 31, 31, 31],
+        "gender": "male",
+        "level": 100,
+        "shiny": true
+    } , {
+        "species": "audino",
+        "item": "leftovers",
+        "ability": "regenerator",
+        "nature": "calm",
+        "moves": ["wish", "protect", "toxic", "knockoff"],
+        "evs": [252, 0, 4, 0, 252, 0],
+        "ivs": [31, 31, 31, 31, 31, 31],
+        "gender": "female",
+        "level": 100,
+        "shiny": true
+    } , {
+        "species": "delphox",
+        "item": "colburberry",
+        "ability": "blaze",
+        "nature": "timid",
+        "moves": ["calmmind", "fireblast", "physic", "grassknot"],
+        "evs": [0, 0, 0, 252, 4, 252],
+        "ivs": [31, 31, 31, 31, 31, 31],
+        "gender": "female",
+        "level": 100,
+        "shiny": true
+    }
+]

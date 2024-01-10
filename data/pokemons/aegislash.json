@@ -1,0 +1,12 @@
+{
+    "species": "aegislash",
+    "item": "ironball",
+    "ability": "stancechange",
+    "nature": "sassy",
+    "moves": ["kingsshield", "toxic", "gyroball", "shadowball"],
+    "evs": [252, 0, 0, 0, 4, 252],
+    "ivs": [31, 31, 31, 31, 31, 31],
+    "gender": "female",
+    "level": 100,
+    "shiny": true
+} 

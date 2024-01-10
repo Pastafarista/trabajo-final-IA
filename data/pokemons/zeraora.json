@@ -1,0 +1,12 @@
+{
+    "species": "zeraora",
+    "item": "lifeorb",
+    "ability": "voltabsorb",
+    "nature": "naive",
+    "moves": ["plasmafists", "closecombat", "grassknot", "knockoff"],
+    "evs": [0, 252, 0, 4, 0, 252],
+    "ivs": [31, 31, 31, 31, 31, 31],
+    "gender": "female",
+    "level": 100,
+    "shiny": true
+}

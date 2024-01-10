@@ -1,0 +1,12 @@
+{
+    "species": "salamence",
+    "item": "lifeorb",
+    "ability": "intimidate",
+    "nature": "jolly",
+    "moves": ["dragondance", "outrage", "earthquake", "fireblast"],
+    "evs": [0, 252, 0, 0, 4, 252],
+    "ivs": [31, 31, 31, 31, 31, 31],
+    "gender": "female",
+    "level": 100,
+    "shiny": true
+}

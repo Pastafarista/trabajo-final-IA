@@ -1,0 +1,36 @@
+[
+    {
+        "species": "keldeo",
+        "item": "leftovers",
+        "ability": "justified",
+        "nature": "timid",
+        "moves": ["calmmind", "scald", "secretsword", "substitute"],
+        "evs": [0, 0, 0, 252, 4, 252],
+        "ivs": [31, 31, 31, 31, 31, 31],
+        "gender": "female",
+        "level": 100,
+        "shiny": true
+    } , {
+        "species": "ferrothorn",
+        "item": "leftovers",
+        "ability": "ironbarbs",
+        "nature": "sassy",
+        "moves": ["spikes", "leechseed", "gyroball", "protect"],
+        "evs": [252, 0, 24, 0, 232, 0],
+        "ivs": [31, 31, 31, 31, 31, 31],
+        "gender": "",
+        "level": 100,
+        "shiny": true
+    } , {
+        "species": "ambipom",
+        "item": "lifeorb",
+        "ability": "technician",
+        "nature": "jolly",
+        "moves": ["fakeout", "return", "lowkick", "pursuit"],
+        "evs": [0, 252, 4, 0, 0, 252],
+        "ivs": [31, 31, 31, 31, 31, 31],
+        "gender": "female",
+        "level": 100,
+        "shiny": true
+    }
+]

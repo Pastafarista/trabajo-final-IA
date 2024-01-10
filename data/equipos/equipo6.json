@@ -1,0 +1,36 @@
+[
+    {
+        "species": "aegislash",
+        "item": "ironball",
+        "ability": "stancechange",
+        "nature": "sassy",
+        "moves": ["kingsshield", "toxic", "gyroball", "shadowball"],
+        "evs": [252, 0, 0, 0, 4, 252],
+        "ivs": [31, 31, 31, 31, 31, 31],
+        "gender": "female",
+        "level": 100,
+        "shiny": true
+    } , {
+        "species": "toxapex",
+        "item": "blacksludge",
+        "ability": "regenerator",
+        "nature": "calm",
+        "moves": ["scald", "haze", "recover", "toxic"],
+        "evs": [252, 0, 4, 0, 0, 252],
+        "ivs": [31, 31, 31, 31, 31, 31],
+        "gender": "female",
+        "level": 100,
+        "shiny": true
+    } , {
+        "species": "volcarona",
+        "item": "iapapaberry",
+        "ability": "flamebody",
+        "nature": "timid",
+        "moves": ["quiverdance", "fireblast", "bugbuzz", "hiddenpowerground"],
+        "evs": [0, 0, 0, 252, 4, 252],
+        "ivs": [31, 31, 31, 31, 31, 31],
+        "gender": "female",
+        "level": 100,
+        "shiny": true
+    }
+]

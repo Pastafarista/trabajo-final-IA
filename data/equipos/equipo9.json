@@ -1,0 +1,36 @@
+[
+    {
+        "species": "chandelure",
+        "item": "leftovers",
+        "ability": "flashfire",
+        "nature": "timid",
+        "moves": ["substitute", "calmmind", "shadowball", "flamethrower"],
+        "evs": [0, 0, 4, 252, 0, 252],
+        "ivs": [31, 31, 31, 31, 31, 31],
+        "gender": "female",
+        "level": 100,
+        "shiny": true
+    } , {
+        "species": "garchomp",
+        "item": "muscleband",
+        "ability": "sandveil",
+        "nature": "jolly",
+        "moves": ["swordsdance", "earthquake", "stoneedge", "substitute"],
+        "evs": [0, 252, 0, 0, 4, 252],
+        "ivs": [31, 31, 31, 31, 31, 31],
+        "gender": "female",
+        "level": 100,
+        "shiny": true
+    } , {
+        "species": "spiritomb",
+        "item": "blackglasses",
+        "ability": "infiltrator",
+        "nature": "adamant",
+        "moves": ["pursuit", "suckerpunch", "foulplay", "willowisp"],
+        "evs": [248, 252, 8, 0, 0, 0],
+        "ivs": [31, 31, 31, 31, 31, 31],
+        "gender": "female",
+        "level": 100,
+        "shiny": true
+    }
+]

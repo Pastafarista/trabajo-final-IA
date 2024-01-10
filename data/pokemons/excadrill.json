@@ -1,0 +1,12 @@
+{
+    "species": "excadrill",
+    "item": "focussash",
+    "ability": "moldbreaker",
+    "nature": "jolly",
+    "moves": ["stealthrock", "rapidspin", "earthquake", "toxic"],
+    "evs": [0, 252, 4, 0, 0, 252],
+    "ivs": [31, 31, 31, 31, 31, 31],
+    "gender": "female",
+    "level": 100,
+    "shiny": true
+} 

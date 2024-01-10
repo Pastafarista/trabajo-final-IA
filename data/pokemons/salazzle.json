@@ -1,0 +1,12 @@
+{
+    "species": "salazzle",
+    "item": "choicescarf",
+    "ability": "corrosion",
+    "nature": "timid",
+    "moves": ["fireblast", "sludgewave", "hiddenpowergrass", "dragonpulse"],
+    "evs": [0, 0, 4, 252, 0, 252],
+    "ivs": [31, 31, 31, 31, 31, 31],
+    "gender": "female",
+    "level": 100,
+    "shiny": true
+}

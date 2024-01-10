@@ -1,0 +1,36 @@
+[
+    {
+        "species": "haxorus",
+        "item": "lumberry",
+        "ability": "moldbreaker",
+        "nature": "jolly",
+        "moves": ["swordsdance", "outrage", "earthquake", "poisonjab"],
+        "evs": [0, 252, 0, 0, 4, 252],
+        "ivs": [31, 31, 31, 31, 31, 31],
+        "gender": "male",
+        "level": 100,
+        "shiny": true
+    } , {
+        "species": "blissey",
+        "item": "leftovers",
+        "ability": "naturalcure",
+        "nature": "bold",
+        "moves": ["seismictoss", "toxic", "softboiled", "healbell"],
+        "evs": [252, 0, 252, 0, 4, 0],
+        "ivs": [31, 31, 31, 31, 31, 31],
+        "gender": "female",
+        "level": 100,
+        "shiny": true
+    } , {
+        "species": "gyarados",
+        "item": "quickclaw",
+        "ability": "intimidate",
+        "nature": "jolly",
+        "moves": ["dragondance", "crunch", "earthquake", "substitute"],
+        "evs": [0, 252, 0, 0, 4, 252],
+        "ivs": [31, 31, 31, 31, 31, 31],
+        "gender": "female",
+        "level": 100,
+        "shiny": true
+    }
+]

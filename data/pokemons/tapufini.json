@@ -1,0 +1,12 @@
+{
+    "species": "tapufini",
+    "item": "leftovers",
+    "ability": "mistysurge",
+    "nature": "calm",
+    "moves": ["defog", "moonblast", "scald", "taunt"],
+    "evs": [248, 0, 16, 12, 40, 192],
+    "ivs": [31, 31, 31, 31, 31, 31],
+    "gender": "female",
+    "level": 100,
+    "shiny": true
+}

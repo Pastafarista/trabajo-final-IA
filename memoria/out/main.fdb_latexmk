@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1704987558 "main.tex" "out/main.pdf" "main" 1704987559 0
+["pdflatex"] 1704989172 "main.tex" "out/main.pdf" "main" 1704989172 0
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1704400182 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1704400182 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -80,15 +80,19 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1704400182 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1704978010 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1704978008 6768051 01e605ad3a3b932a196630f43da9ef5a ""
+  "explication.tex" 1704989136 707 80352e61c5192c8ca7ef7a14a5508768 ""
+  "figures/combat.jpg" 1704988801 59596 3b69a8b006c417ec1ee845e4eed1d047 ""
   "figures/logo u-tad.png" 1704978381 156089 a566e00413c76d0794ab42596f8cd81e ""
-  "introduction.tex" 1704987552 1381 43299f071ab472b666dd368fedbe2c24 ""
-  "main.tex" 1704987494 1264 bb14fdaaf5e48d8cf8cdcefe4b611753 ""
-  "out/introduction.aux" 1704987559 1120 811e610bd96a19abedd27047415a8187 "pdflatex"
-  "out/main.aux" 1704987559 599 029888e1bbd37ee23b55fc289ea26199 "pdflatex"
-  "out/main.lof" 1704987559 20 f06013b926d20d994f242e1f23baff30 "pdflatex"
-  "out/main.out" 1704987559 299 da90fef981cea45ff6e14cca24353720 "pdflatex"
-  "out/main.toc" 1704987559 206 8032424ca28c21d828ac9e478a6b41a1 "pdflatex"
+  "introduction.tex" 1704989123 1380 ad32b4cdc254ffcaa53a95ecc5402c58 ""
+  "main.tex" 1704989157 1286 38cfeec37cce738cfc352958947e1602 ""
+  "out/explication.aux" 1704989172 1381 8aff15bd86a5fbfd6b6f0ef1c59aec15 "pdflatex"
+  "out/introduction.aux" 1704989172 1120 811e610bd96a19abedd27047415a8187 "pdflatex"
+  "out/main.aux" 1704989172 624 eb54f69fe0630b265c91201c54d9ba6c "pdflatex"
+  "out/main.lof" 1704989172 157 0f3dd072bad3761a0790cb31767627bc "pdflatex"
+  "out/main.out" 1704989172 641 e13f3b2d73ccdf81c991a1ce67d8dc70 "pdflatex"
+  "out/main.toc" 1704989172 428 31644028d6f8b76aade14d58e41a45a6 "pdflatex"
   (generated)
+  "out/explication.aux"
   "out/introduction.aux"
   "out/main.aux"
   "out/main.lof"

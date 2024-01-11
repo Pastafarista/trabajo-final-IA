@@ -1,3 +1,6 @@
 \contentsline {chapter}{\numberline {1}Introducción}{3}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Contexto}{3}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Objetivos}{3}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Explicación del juego}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Batallas}{4}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Turnos}{4}{subsection.2.1.1}%

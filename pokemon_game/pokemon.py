@@ -74,9 +74,9 @@ def add_status(P:Pokemon, status:str, source:Pokemon=None):
         return False
     #print(self.name + self.ability)
 
-    if status == 'brn' and ('Fire' in P.types or dex.ability_dex[P.ability].prevent_burn):
+    if status == 'brn' and ('Fire' in P.types):
         return False
-    if status == 'par' and ('Electric' in P.types or dex.ability_dex[P.ability].prevent_par):
+    if status == 'par' and ('Electric' in P.types):
         return False
     if (status == 'psn' or status == 'tox') and ('Poison' in P.types or 'Steel' in P.types):
         if source is not None and source.ability == 'corrosion':

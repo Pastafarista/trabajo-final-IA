@@ -1,4 +1,4 @@
-# Authors: Antonio Cabrera, Alejandro Gómez, Alejandro no-me-se-tu-apellido-mamón, Antonio Perez, Luis Crespo
+# Authors: Antonio Cabrera, Alejandro Gómez, Alejandro Jiménez, Antonio Perez, Luis Crespo
 # Description: El agente se encargará de comunicar el entorno con el modelo de aprendizaje, también se encargará de entrenar al modelo y de realizar las predicciones.
 
 import random

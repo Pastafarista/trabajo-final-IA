@@ -1,2 +1,3 @@
 \contentsline {chapter}{\numberline {1}Introducción}{3}{chapter.1}%
-\contentsline {section}{\numberline {1.1}¿Qué es un fractal?}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.1}Contexto}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Objetivos}{3}{section.1.2}%

@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1704984900 "main.tex" "out/main.pdf" "main" 1704984901 0
+["pdflatex"] 1704987558 "main.tex" "out/main.pdf" "main" 1704987559 0
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1704400182 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1704400182 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -81,13 +81,13 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1704978010 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1704978008 6768051 01e605ad3a3b932a196630f43da9ef5a ""
   "figures/logo u-tad.png" 1704978381 156089 a566e00413c76d0794ab42596f8cd81e ""
-  "introduction.tex" 1704978324 58 48793f174d62b68ea0f005a01e4327cf ""
-  "main.tex" 1704984524 1255 2328aa7ea75ca94b82e7003145e6ae04 ""
-  "out/introduction.aux" 1704984901 1023 8ee2fbd255078f05c529c10ff6f34a48 "pdflatex"
-  "out/main.aux" 1704984901 599 029888e1bbd37ee23b55fc289ea26199 "pdflatex"
-  "out/main.lof" 1704984901 20 f06013b926d20d994f242e1f23baff30 "pdflatex"
-  "out/main.out" 1704984901 270 302a2fddffb9fed40a49ee322e23a094 "pdflatex"
-  "out/main.toc" 1704984901 150 8976b1f4f3dfddd9b45e61772a7c9a53 "pdflatex"
+  "introduction.tex" 1704987552 1381 43299f071ab472b666dd368fedbe2c24 ""
+  "main.tex" 1704987494 1264 bb14fdaaf5e48d8cf8cdcefe4b611753 ""
+  "out/introduction.aux" 1704987559 1120 811e610bd96a19abedd27047415a8187 "pdflatex"
+  "out/main.aux" 1704987559 599 029888e1bbd37ee23b55fc289ea26199 "pdflatex"
+  "out/main.lof" 1704987559 20 f06013b926d20d994f242e1f23baff30 "pdflatex"
+  "out/main.out" 1704987559 299 da90fef981cea45ff6e14cca24353720 "pdflatex"
+  "out/main.toc" 1704987559 206 8032424ca28c21d828ac9e478a6b41a1 "pdflatex"
   (generated)
   "out/introduction.aux"
   "out/main.aux"

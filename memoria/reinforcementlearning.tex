@@ -1,0 +1,15 @@
+\chapter{Reinforcement Learning}
+
+A continuación, se va a explicar brevemente en qué consiste el Reinforcement Learning (a partir de ahora RL), además de explicar cómo se aplicará este area del aprendizaje automático a nuestro trabajo.
+
+\section{RL}
+
+El RL es un paradigma de aprendizaje automático que se centra en enseñar a un agente a tomar decisiones secuenciales para maximizar una recompensa acumulativa a lo largo del tiempo. En este enfoque de aprendizaje automático, el agente interactúa con un entorno dinámico y aprende a base de las recompensas y penalizaciones que conllevan sus decisiones.
+
+\section{RL en Pokémon}
+
+Como en este trabajo estamos llevando a cabo batallas pokemon, el agente tiene un rango de 4 opciones a la hora de realizar una accion. Estas opciones son los 4 movimientos que puede efectuar el pokemon que está en ese momento luchando. La forma en la que se entregarán recompensas y penalizaciones al agente será en base de si estos movimientos inflingen daño (quitan puntos de vida del pokemon al que se enfrenta), o si gana el combate. De esta forma el agente aprenderá qué movimientos son los óptimos para los distintos pokemons.
+
+El agente también posee un estado, en relación con el entorno de este trabajo. Este estado incluirá valores como, por ejemplo, el tipo o tipos de Pokémon que el agente maneja y el Pokémon al que se enfrenta, las puntuaciones de vida de los Pokémon y los movimientos disponibles de los Pokémon.
+
+Para elegir la accion que realizará el Pokémon, el modelo que se creará tendrá que recibir como inputs, todos los valores del estado comentados previamente y devolvera un output de 4 valores correspondientes a los 4 posibles movimientos del Pokémon controlado por el agente, de los cuales se elegirá el que tenga un mayor valor.

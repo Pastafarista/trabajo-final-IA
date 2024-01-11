@@ -18,8 +18,15 @@ def get_specialattack(P:Pokemon) -> float:
 def get_specialdefense(P:Pokemon) -> float:
     return P.stats.specialdefense
 
-def get_speed(P:Pokemon) -> float:
-    return P.stats.speed
+def get_speed(P:Pokemon, trickroom:bool, tailwind:bool) -> float:
+    modifier = dex.boost[P.boosts['spd']]
+
+    if tailwind:
+        modifier *=2.0
+    if trickroom:
+        return 12096 - (P.stats.speed * modifier)
+    
+    return P.stats.speed * modifier
 
 def get_accuracy(P:Pokemon) -> float:
     return dex.accuracy[P.boosts['accuracy']]
@@ -68,29 +75,24 @@ def faint(P:Pokemon) -> None:
     return
 
 def add_status(P:Pokemon, status:str, source:Pokemon=None):
+    
     if P.status != '':
         return False
     if status is None:
         return False
-    #print(self.name + self.ability)
 
-    if status == 'brn' and ('Fire' in P.types or dex.ability_dex[P.ability].prevent_burn):
+    if status == 'brn' and ('Fire' in P.types):
         return False
-    if status == 'par' and ('Electric' in P.types or dex.ability_dex[P.ability].prevent_par):
+    if status == 'par' and ('Electric' in P.types):
         return False
     if (status == 'psn' or status == 'tox') and ('Poison' in P.types or 'Steel' in P.types):
         if source is not None and source.ability == 'corrosion':
             pass
         else:
             return False
-    if (status == 'psn' or status == 'tox') and dex.ability_dex[P.ability].prevent_psn:
-        return False
-    if status == 'slp' and dex.ability_dex[P.ability].prevent_slp:
-        return False
 
     if status == 'slp':
         P.sleep_n = random.randint(1, 3)
-
 
     P.status = status
     return True

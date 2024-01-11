@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1705004444 "main.tex" "out/main.pdf" "main" 1705004444 0
+["pdflatex"] 1705011681 "main.tex" "out/main.pdf" "main" 1705011682 0
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1704400182 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1704400182 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -87,13 +87,15 @@
   "figures/logo u-tad.png" 1704978381 156089 a566e00413c76d0794ab42596f8cd81e ""
   "figures/pokemons.jpg" 1705002792 562933 619485b4c2ce083029615fd7562df696 ""
   "introduction.tex" 1704989123 1380 ad32b4cdc254ffcaa53a95ecc5402c58 ""
-  "main.tex" 1704989157 1286 38cfeec37cce738cfc352958947e1602 ""
-  "out/explication.aux" 1705004444 2245 186c3761133022c671771f64da073d2e "pdflatex"
-  "out/introduction.aux" 1705004444 1120 811e610bd96a19abedd27047415a8187 "pdflatex"
-  "out/main.aux" 1705004444 624 e80d9a5dca8a748152aef6306d256d69 "pdflatex"
-  "out/main.lof" 1705004444 462 f8fbf7e4aecf2a8e6f31d446e7205732 "pdflatex"
-  "out/main.out" 1705004444 825 cc3c09b4fb62a9c695f202fa2215c027 "pdflatex"
-  "out/main.toc" 1705004444 555 56a08753ef0a86e04c5f98eb6ec987a7 "pdflatex"
+  "main.tex" 1705011680 1319 f3c8aff3959f153220e296503e3ac91b ""
+  "out/explication.aux" 1705011682 2245 186c3761133022c671771f64da073d2e "pdflatex"
+  "out/introduction.aux" 1705011682 1120 811e610bd96a19abedd27047415a8187 "pdflatex"
+  "out/main.aux" 1705011682 660 3b83396dc9db9e0457ec35ccac31c373 "pdflatex"
+  "out/main.lof" 1705011682 482 c925d1d4733bd5d63c432d6ce02aa5e9 "pdflatex"
+  "out/main.out" 1705011682 1175 1b3d349e0e974d2596bd1781124a680c "pdflatex"
+  "out/main.toc" 1705011682 769 2e1f1e9ed6a4023df55460626ab7346b "pdflatex"
+  "out/reinforcement_learning.aux" 1705011682 1139 8c10466a08b26d4eb09cd81e2bd01ab8 "pdflatex"
+  "reinforcement_learning.tex" 1705011625 1820 9cf33512b65c33f6bd2c665d1bb8c4d6 ""
   (generated)
   "out/explication.aux"
   "out/introduction.aux"
@@ -103,4 +105,5 @@
   "out/main.out"
   "out/main.pdf"
   "out/main.toc"
+  "out/reinforcement_learning.aux"
   (rewritten before read)

@@ -545,6 +545,9 @@ INPUT out/introduction.aux
 INPUT out/explication.aux
 INPUT out/explication.aux
 INPUT out/explication.aux
+INPUT out/reinforcement_learning.aux
+INPUT out/reinforcement_learning.aux
+INPUT out/reinforcement_learning.aux
 OUTPUT out/main.aux
 INPUT /usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -690,6 +693,16 @@ INPUT ./figures/hiperrayo.jpg
 INPUT figures/hiperrayo.jpg
 INPUT ./figures/hiperrayo.jpg
 INPUT ./figures/hiperrayo.jpg
+INPUT ./reinforcement_learning.tex
+INPUT ./reinforcement_learning.tex
+INPUT ./reinforcement_learning.tex
+OUTPUT out/reinforcement_learning.aux
+INPUT ./reinforcement_learning.tex
+INPUT ./reinforcement_learning.tex
+INPUT ./reinforcement_learning.tex
+INPUT reinforcement_learning.tex
+INPUT ./reinforcement_learning.tex
+INPUT reinforcement_learning.tex
 INPUT out/main.aux
 INPUT out/introduction.aux
 INPUT out/introduction.aux
@@ -697,6 +710,9 @@ INPUT out/introduction.aux
 INPUT out/explication.aux
 INPUT out/explication.aux
 INPUT out/explication.aux
+INPUT out/reinforcement_learning.aux
+INPUT out/reinforcement_learning.aux
+INPUT out/reinforcement_learning.aux
 INPUT out/main.out
 INPUT out/main.out
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb

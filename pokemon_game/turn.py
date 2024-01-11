@@ -580,8 +580,255 @@ def unique_moves_after_damage(B:Battle, user:Pokemon, move:dex.Move, target:Poke
     # conversion
     move_types = []
     if move.id == 'conversion':
-        for user_move in user.moves:
-            if dex.move_dex[user_move].type not in user.types:
-                move_types.append(dex.move_dex[user_move].type)
+        if user.last_damaging_move is not None:
+            for type in dex.typechart_dex[dex.move_dex[user.last_damaging_move].type].damage_taken:
+                if type not in user.types:
+                    move_types.append(type)
         if len(move_types) > 0:
             user.types = [move_types[random.randint(0, len(move_types)-1)]]
+
+    # curse
+    if move.id == 'curse' and 'Ghost' not in user.types:
+        boost(user, {'atk': 1, 'def': 1, 'spe': -1})
+
+    # defog
+    if move.id == 'defog':
+        boost(target, {'evasion': -1})
+        #target.side.side_condition = set()
+
+    # entrainment
+    if move.id == 'entrainment':
+        target.ability = user.ability
+
+    # flower shield
+    if move.id == 'flowershield':
+        if 'Grass' in user.types:
+            boost(user, {'def': 1})
+        if 'Grass' in target.types:
+            boost(target, {'def': 1})
+
+     # forests curse
+    if move.id == 'forestscurse':
+        target.types.append('Grass')
+
+    # gastro acid
+    if move.id == 'gastroacid':
+        if target.ability not in ['multitype', 'stancechance', 'schooling', 'comatose', 'shieldsdown', 'disguise', 'rkssystem', 'battlebond', 'powerconstruct']:
+            target.ability = 'suppressed'
+
+    # guard split
+    if move.id == 'guardsplit':
+        avg_def = (user.stats.defense + target.stats.defense)/2
+        avg_spd = (user.stats.specialdefense + target.stats.specialdefense)/2
+
+        user.stats.defense =  avg_def
+        target.stats.defense = avg_def
+
+        user.stats.specialdefense = avg_spd
+        target.stats.specialdefense = avg_spd
+
+    # guard swap
+    if move.id == 'guardswap':
+        user_def = user.stats.defense
+        target_def = target.stats.defense
+
+        user_spd = user.stats.specialdefense
+        target_spd = target.stats.specialdefense
+
+        user.stats.defense = target_def
+        target.stats.defense = user_def
+
+        user.stats.specialdefense = target_spd
+        target.stats.specialdefense = user_spd
+
+    # heart swap
+    if move.id == 'heartswap':
+        user_boosts = user.boosts
+        target_boosts = target.boosts
+
+        user.boosts = target_boosts
+        target.boosts = user_boosts
+
+    # kinggsheild
+    if move.id == 'kingsshield' and user.id == 'aegislash':
+        pass
+
+    # pain split
+    if move.id == 'painsplit':
+        avg_hp = (user.hp + target.hp) /2
+        user.hp = avg_hp if avg_hp < user.stats.hp else user.stats.hp
+        target.hp = avg_hp if avg_hp < target.stats.hp else target.stats.hp
+
+    # power split
+    if move.id == 'powersplit':
+        avg_atk = (user.stats.attack + target.stats.attack)/2
+        avg_spa = (user.stats.specialattack + target.stats.specialattack)/2
+
+        user.stats.attack = avg_atk
+        target.stats.attack = avg_atk
+
+        user.stats.specialattack = avg_spa
+        target.stats.specialattack = avg_spa
+
+    # power swap
+    if move.id == 'powerswap':
+        user_atk = user.stats.attack
+        target_atk = target.stats.attack
+
+        user_spa = user.stats.specialattack
+        target_spa = target.stats.specialattack
+
+        user.stats.attack = target_atk
+        target.stats.attack = user_atk
+
+        user.stats.specialattack = target_spa
+        target.stats.specialattack = user_spa
+
+    # power trick
+    if move.id == 'powertrick':
+        user_atk = user.stats.attack
+        user_spa = user.stats.specialattack
+
+        user.stats.specialattack = user_atk
+        user.stats.attack = user_spa
+
+    # psychoshift
+    if move.id == 'psychoshift':
+        if add_status(target, user.status):
+            cure_status(user)
+
+    # psychup
+    if move.id == 'psychup':
+        user.boosts = target.boosts
+
+    # purify
+    if move.id == 'purify':
+        if cure_status(target):
+            damage(user, -0.5, flag='percentmaxhp')
+
+    # reflect type
+    if move.id == 'reflecttype':
+        user.types = target.types
+
+    # refresh
+    if move.id == 'refresh':
+        if user.status in ['brn', 'par', 'psn', 'tox']:
+            cure_status(user)
+
+    # rest
+    if move.id == 'rest':
+        if user.status != 'slp':
+            user.status = 'slp'
+            user.sleep_n = 2
+            damage(user, -1, flag='percentmaxhp')
+
+    # sketch
+    if move.id == 'sketch':
+        pass
+
+    # sleep talk
+    if move.id == 'sleeptalk':
+        if user.status == 'slp' and len(user.moves) > 1:
+            while move.id == 'sleeptalk':
+                move = dex.move_dex[user.moves[random.randint(0, len(user.moves)-1)]]
+
+    # soak
+    if move.id == 'soak':
+        target.types = ['Water']
+
+    # speed swap
+    if move.id == 'speedswap':
+        user_speed = user.stats.speed
+        target_speed = target.stats.speed
+
+        user.stats.speed = target_speed
+        target.stats.speed = user_speed
+
+    # stockpile
+    if move.id == 'stockpile':
+        user.stockpile += 1
+        if user.stockpile > 3:
+            user.stockpile = 3
+        boost(user, {'def': 1, 'spd': 1})
+
+    # strength sap
+    if move.id == 'strengthsap':
+        if target.boosts['atk'] != -6:
+            damage(user, -(get_attack(target, B.weather)))
+            boost(target, {'atk': -1})
+
+    # substitute
+    if move.id == 'substitute':
+        if not user.substitute and user.hp > user.stats.hp*0.25:
+            user.substitute = True
+            damage(user, 0.25, flag='percentmaxhp')
+
+     # topsy-turvy
+    if move.id == 'topsyturvy':
+        for stat in target.boosts:
+            target.boosts[stat] = -target.boosts[stat]
+
+    # trick or treat
+    if move.id == 'trickortreat':
+        target.types.append('Ghost')
+
+    # breaks protect
+    if move.breaks_protect:
+        if 'protect' in target.volatile_statuses:
+            target.volatile_statuses.remove('protect')
+        if 'banefulbunker' in target.volatile_statuses:
+            target.volatile_statuses.remove('banefulbunker')
+        if 'spikyshield' in target.volatile_statuses:
+            target.volatile_statuses.remove('spikyshield')
+        if 'kingsshield' in target.volatile_statuses:
+            target.volatile_statuses.remove('kingsshield')
+
+    # growth (the move) does another stat boost in the sun
+    if move.id == 'growth':
+        if B.weather == 'sunlight':
+            boost(target, move.primary['self']['boosts'])
+
+def create_move(B:Battle, p:Pokemon, c:Decision) -> dex.Move:
+    '''
+        Con este metodo cogemos todos los datos del movimiento
+    '''
+    if c.type != 'move':
+        return
+    
+    if p.pp[p.moves[c.selection]] <= 0:
+        move = dex.move_dex['struggle']
+        return move
+
+    move = dex.move_dex[p.moves[c.selection]]
+
+    # encore overwrites move decision
+    if 'encore' in p.volatile_statuses and p.last_used_move is not None:
+        move = dex.move_dex[p.last_used_move]
+        #return move # Can you z move the encored move? I think yes?
+
+    return move
+
+def populate_action_queue(q:List, p:Pokemon, c:Decision, m:dex.Move, T:Player, B:Battle) -> None:
+    a = None
+
+    # move decision actions
+    if c.type == 'move':
+        a = Action('move', user=p, move=m, target=c.target)
+
+    if a is not None:
+        heapq.heappush(q, (resolve_priority(a, B, T), a))
+    return
+
+def resolve_priority(action, B:Battle, T:Player) -> float:
+    action_priority_tier : int = None
+
+    if action.action_type == 'switch':
+        action_priority_tier = 1
+    elif action.action_type == 'move':
+        action_priority_tier = 3 + (5 - action.move.priority)
+
+    speed = 12096 - get_speed(action.user, B.weather, B.terrain, B.trickroom, T.tailwind)
+
+    priority = action_priority_tier * 13000
+
+    return priority + speed + random.random()

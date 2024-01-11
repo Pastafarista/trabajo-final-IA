@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.1.11)  11 JAN 2024 21:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.1.11)  11 JAN 2024 21:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -336,7 +336,7 @@ Package hyperref Info: Link coloring ON on input line 24.
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
-<figures/logo u-tad.png, id=40, 1204.5pt x 586.19pt>
+<figures/logo u-tad.png, id=36, 1204.5pt x 586.19pt>
 File: figures/logo u-tad.png Graphic file (type png)
 <use figures/logo u-tad.png>
 Package pdftex.def Info: figures/logo u-tad.png  used on input line 45.
@@ -381,50 +381,50 @@ Chapter 1.
 
  (./explication.tex
 Chapter 2.
-<figures/combat.jpg, id=80, 642.4pt x 481.8pt>
+<figures/combat.jpg, id=75, 642.4pt x 481.8pt>
 File: figures/combat.jpg Graphic file (type jpg)
 <use figures/combat.jpg>
-Package pdftex.def Info: figures/combat.jpg  used on input line 13.
+Package pdftex.def Info: figures/combat.jpg  used on input line 11.
 (pdftex.def)             Requested size: 172.5pt x 129.37462pt.
+<figures/pokemons.jpg, id=76, 1734.48pt x 1734.48pt>
+File: figures/pokemons.jpg Graphic file (type jpg)
+<use figures/pokemons.jpg>
+Package pdftex.def Info: figures/pokemons.jpg  used on input line 21.
+(pdftex.def)             Requested size: 172.5pt x 172.47891pt.
 [4
 
 
 
 
  <./figures/combat.jpg>]
-<figures/pokemons.jpg, id=85, 1734.48pt x 1734.48pt>
-File: figures/pokemons.jpg Graphic file (type jpg)
-<use figures/pokemons.jpg>
-Package pdftex.def Info: figures/pokemons.jpg  used on input line 23.
-(pdftex.def)             Requested size: 172.5pt x 172.47891pt.
-<figures/chart.png, id=86, 843.15pt x 903.375pt>
+<figures/chart.png, id=81, 843.15pt x 903.375pt>
 File: figures/chart.png Graphic file (type png)
 <use figures/chart.png>
-Package pdftex.def Info: figures/chart.png  used on input line 33.
+Package pdftex.def Info: figures/chart.png  used on input line 31.
 (pdftex.def)             Requested size: 172.5pt x 184.82089pt.
- [5 <./figures/pokemons.jpg>]
-<figures/hiperrayo.jpg, id=91, 250.9375pt x 188.705pt>
+ [5 <./figures/pokemons.jpg> <./figures/chart.png (PNG copy)>]
+<figures/hiperrayo.jpg, id=86, 250.9375pt x 188.705pt>
 File: figures/hiperrayo.jpg Graphic file (type jpg)
 <use figures/hiperrayo.jpg>
-Package pdftex.def Info: figures/hiperrayo.jpg  used on input line 43.
+Package pdftex.def Info: figures/hiperrayo.jpg  used on input line 41.
 (pdftex.def)             Requested size: 172.5pt x 129.72572pt.
-) [6 <./figures/chart.png (PNG copy)> <./figures/hiperrayo.jpg>] (out/main.aux (out/introduction.aux) (out/explication.aux))
+) [6 <./figures/hiperrayo.jpg>] (out/main.aux (out/introduction.aux) (out/explication.aux))
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 914F85AD7F8880D80ED22433B702BAE4;947.
+(rerunfilecheck)             Checksum: CC3C09B4FB62A9C695F202FA2215C027;825.
  ) 
 Here is how much of TeX's memory you used:
- 11188 strings out of 477985
- 172804 string characters out of 5840058
+ 11184 strings out of 477985
+ 172711 string characters out of 5840058
  1854388 words of memory out of 5000000
- 31200 multiletter control sequences out of 15000+600000
- 516716 words of font info for 49 fonts, out of 8000000 for 9000
+ 31197 multiletter control sequences out of 15000+600000
+ 516111 words of font info for 47 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,6n,76p,554b,448s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on out/main.pdf (7 pages, 956445 bytes).
+Output written on out/main.pdf (7 pages, 956139 bytes).
 PDF statistics:
- 123 PDF objects out of 1000 (max. 8388607)
- 100 compressed objects within 1 object stream
- 22 named destinations out of 1000 (max. 500000)
- 98 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 118 PDF objects out of 1000 (max. 8388607)
+ 95 compressed objects within 1 object stream
+ 21 named destinations out of 1000 (max. 500000)
+ 90 words of extra memory for PDF output out of 10000 (max. 10000000)
 

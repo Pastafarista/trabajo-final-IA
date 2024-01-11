@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1705003707 "main.tex" "out/main.pdf" "main" 1705003707 0
+["pdflatex"] 1705004444 "main.tex" "out/main.pdf" "main" 1705004444 0
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1704400182 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1704400182 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -80,7 +80,7 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1704400182 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1704978010 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1704978008 6768051 01e605ad3a3b932a196630f43da9ef5a ""
-  "explication.tex" 1705003706 2296 0a4df53c82fdc95e6f2e8f416f12951a ""
+  "explication.tex" 1705004440 2269 7b6b2231be70111bd9c9c2adc666a7e1 ""
   "figures/chart.png" 1705002960 81459 e22a82026801d788762182cd527f2ba6 ""
   "figures/combat.jpg" 1704988801 59596 3b69a8b006c417ec1ee845e4eed1d047 ""
   "figures/hiperrayo.jpg" 1705003307 14802 a7fa8d4e8033d8611a9210d15fd87dbf ""
@@ -88,12 +88,12 @@
   "figures/pokemons.jpg" 1705002792 562933 619485b4c2ce083029615fd7562df696 ""
   "introduction.tex" 1704989123 1380 ad32b4cdc254ffcaa53a95ecc5402c58 ""
   "main.tex" 1704989157 1286 38cfeec37cce738cfc352958947e1602 ""
-  "out/explication.aux" 1705003707 2394 df1f14e3c68c62141df26fdb50b65afb "pdflatex"
-  "out/introduction.aux" 1705003707 1120 811e610bd96a19abedd27047415a8187 "pdflatex"
-  "out/main.aux" 1705003707 624 e80d9a5dca8a748152aef6306d256d69 "pdflatex"
-  "out/main.lof" 1705003707 462 87928b2b781561077a68709b21bb06d5 "pdflatex"
-  "out/main.out" 1705003707 947 914f85ad7f8880d80ed22433b702bae4 "pdflatex"
-  "out/main.toc" 1705003707 663 ed6f2d2428844e4edf5a1a3aca5e5627 "pdflatex"
+  "out/explication.aux" 1705004444 2245 186c3761133022c671771f64da073d2e "pdflatex"
+  "out/introduction.aux" 1705004444 1120 811e610bd96a19abedd27047415a8187 "pdflatex"
+  "out/main.aux" 1705004444 624 e80d9a5dca8a748152aef6306d256d69 "pdflatex"
+  "out/main.lof" 1705004444 462 f8fbf7e4aecf2a8e6f31d446e7205732 "pdflatex"
+  "out/main.out" 1705004444 825 cc3c09b4fb62a9c695f202fa2215c027 "pdflatex"
+  "out/main.toc" 1705004444 555 56a08753ef0a86e04c5f98eb6ec987a7 "pdflatex"
   (generated)
   "out/explication.aux"
   "out/introduction.aux"

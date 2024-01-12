@@ -125,12 +125,13 @@ class Pokemon:
             'accuracy': 0,
             'evasion': 0
         }
-        self.name = poke.name
-        self.species = poke.species
-        self.id = poke.species
-        self.moves = poke.moves
 
-        self.stats = calculate_stats(self, poke.evs, poke.ivs)
+        self.name = poke["name"]
+        self.species = poke["species"]
+        self.id = poke["species"]
+        self.moves = poke["moves"]
+
+        self.stats = calculate_stats(self, poke["evs"], poke["ivs"])
 
         self.hp = self.stats.hp
         self.maxhp = self.stats.hp

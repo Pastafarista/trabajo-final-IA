@@ -51,12 +51,7 @@ def turn_end(B:Battle) -> None:
             pokemon.bound_n -= 1
             if pokemon.bound_n == 0:
                 pokemon.volatile_statuses -= {'partiallytrapped'}
-        # aqua ring
-        if pokemon.aqua_ring:
-            dmg = -1/16
-            if pokemon.item == 'bigroot':
-                dmg *= 1.3
-            damage(pokemon, dmg, 'percentmaxhp')
+    
         # nightmare
         if 'nightmare' in pokemon.volatile_statuses:
             if pokemon.status == 'slp':
@@ -815,8 +810,6 @@ def populate_action_queue(q:List, p:Pokemon, c:Decision, m:dex.Move, T:Player, B
     if c.type == 'move':
         a = Action('move', user=p, move=m, target=c.target)
 
-    if a is not None:
-        heapq.heappush(q, (resolve_priority(a, B, T), a))
     return
 
 def resolve_priority(action, B:Battle, T:Player) -> float:

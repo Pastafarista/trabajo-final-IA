@@ -27,10 +27,12 @@ def create_team(num_pokemons):
             moves = general_pokemon['moves']
             ivs = general_pokemon['ivs']
             evs = general_pokemon['evs']
+            nature = general_pokemon['nature']
 
             pokemon['moves'] = moves
             pokemon['ivs'] = ivs
             pokemon['evs'] = evs
+            pokemon['nature'] = nature
 
         team.append(pokemon)
 

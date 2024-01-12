@@ -3,35 +3,44 @@ import time
 from collections import namedtuple
 import random
 import re
-import os
+
 
 #this module is for searching the dex, aka all the game data
 
 #missing statuses, scripts, rulesets(formats), formatsdata( event pokemon and thespeed move_dex), aliases
 
-# direcorio padre
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# path al folder ../data
-PATH = os.path.join(BASE_DIR, 'data/')
-
-with open(PATH + 'moves.json') as f:
+with open('data/abilities.json') as f:
+    abilities_raw_data = json.load(f)
+with open('data/formats.json') as f:
+    formats_raw_data = json.load(f)
+with open('data/items.json') as f:
+    items_raw_data = json.load(f)
+with open('data/moves.json') as f:
     moves_raw_data = json.load(f)
-with open(PATH + 'pokedex.json') as f:
+with open('data/pokedex.json') as f:
     pokemon_raw_data = json.load(f)
-with open(PATH + 'typechart.json') as f:
+with open('data/typechart.json') as f:
     typecharts_raw_data = json.load(f)
-with open(PATH + 'all.json') as f:
+with open('data/natures.json') as f:
+    natures_raw_data = json.load(f)
+with open('data/simple_learnsets.json') as f:
+    simple_learnsets = json.load(f)
+with open('data/sample_teams.json') as f:
+    sample_teams = json.load(f)
+with open('data/all.json') as f:
     pokemon_raw_base = json.load(f)
 
+sample_teams = sample_teams
+simple_learnsets = simple_learnsets
+
 # target can be : 'foe0', 'foe1', 'ally', 'self', 'foes', 'allies', 'adjacent', 'all'
-class Decision(namedtuple('Decision', ['type', 'selection', 'target'])):
-    def __new__(cls, type, selection, target='foe0'):
-        return super(Decision, cls).__new__(cls, type, selection, target)
+class Decision(namedtuple('Decision', ['type', 'selection', 'target', 'mega', 'zmove'])):
+    def __new__(cls, type, selection, target='foe0', mega=False, zmove=False):
+        return super(Decision, cls).__new__(cls, type, selection, target, mega, zmove)
         
-class Action(namedtuple('Action', ['user', 'move', 'target', 'base_move'])):
-    def __new__(cls, user, move, target=None, base_move=None):
-        return super(Action, cls).__new__(cls, user, move, target, base_move)
+class Action(namedtuple('Action', ['user', 'move', 'target', 'zmove', 'base_move'])):
+    def __new__(cls, user, move, target=None, zmove=False, base_move=None):
+        return super(Action, cls).__new__(cls, user, move, target, zmove, base_move)
 
 index_to_id_pokemon = {}
 for poke in pokemon_raw_base:
@@ -40,6 +49,19 @@ for poke in pokemon_raw_base:
 index_to_id_moves = {}
 for move in moves_raw_data:
     index_to_id_moves[moves_raw_data[move]['num']] = move
+
+index_to_id_abilities = {}
+for ability in abilities_raw_data:
+    index_to_id_abilities[abilities_raw_data[ability]['num']] = ability
+
+index_to_id_natures = {}
+for nature in natures_raw_data:
+    index_to_id_natures[natures_raw_data[nature]['num']] = nature
+
+index_to_id_items = {}
+for item in items_raw_data:
+    #print(items_raw_data[item])
+    index_to_id_items[items_raw_data[item]['num']] = item
 
 
 #-------------
@@ -72,6 +94,64 @@ for i in pokemon_raw_data:
 
     pokedex[i] = Pokemon._make([pokemon_raw_data[i][j] for j in pokemonAttributes])
 
+
+#------------
+#ABILITIES
+#------------
+abilityAttributes = ['id', 'desc', 'shortDesc', 'name', 'rating', 'num', 'prevent_burn', 'prevent_par', 'prevent_slp', 'prevent_psn'] 
+ability_dex = {}
+
+Ability = namedtuple('Ability', abilityAttributes) #way more props, supressweather, onmodifymovepriority, onbasepowerpriority
+
+for i in abilities_raw_data:
+    for a in abilityAttributes:
+        if a not in abilities_raw_data[i]:
+            abilities_raw_data[i][a] = None
+
+    ability_dex[i] = Ability._make([abilities_raw_data[i][j] for j in abilityAttributes])
+
+
+#---------
+#Format
+#---------
+formatAttributes = ['id', 'name', 'desc', 'mod', 'gameType', 'forcedLevel', 'teamLength', 'timer', 'ruleset', 'banlist'] 
+format_dex = {}
+
+Format = namedtuple('Format', formatAttributes)
+TeamLength = namedtuple('TeamLength', 'validate battle')
+Timer = namedtuple('Timer', 'starting perTurn maxPerTurn maxFirstTurn timeoutAutoChoose')
+
+for i in formats_raw_data:
+    for a in formatAttributes:
+        if a not in formats_raw_data[i]:
+            formats_raw_data[i][a] = None
+        else:
+            if a == 'teamLength':
+                formats_raw_data[i][a] = TeamLength(formats_raw_data[i][a]['validate'], formats_raw_data[i][a]['battle'])
+            elif a == 'timer':
+                formats_raw_data[i][a] = Timer(formats_raw_data[i][a]['starting'], formats_raw_data[i][a]['perTurn'], formats_raw_data[i][a]['maxPerTurn'], formats_raw_data[i][a]['maxFirstTurn'],  formats_raw_data[i][a]['timeoutAutoChoose'])
+
+    formats_raw_data[i]['id'] = i
+
+    format_dex[i] = Format._make([formats_raw_data[i][j] for j in formatAttributes])
+
+#--------
+#items_raw_data
+#---------
+
+itemAttributes = ['id', 'name', 'spritenum', 'isBerry', 'naturalGift', 'zMove', 'zMoveFrom', 'zMoveUser', 'zMoveType', 'megaStone', 'megaEvolves', 'num', 'gen', 'desc']
+item_dex = {}
+
+Item = namedtuple('Item', itemAttributes) #some missing props
+
+for i in items_raw_data:
+    for a in itemAttributes:
+        if a not in items_raw_data[i]:
+            items_raw_data[i][a] = None
+
+    item_dex[i] = Item._make([items_raw_data[i][j] for j in itemAttributes])
+
+
 #--------
 #moves_raw_data
 #---------
@@ -90,17 +170,40 @@ flags = ['pulse', 'bullet', 'sound', 'powder', 'authentic', 'nonsky', 'distance'
          'dance', 'mystery', 'protect', 'snatch', 'recharge', 'gravity', 'mirror',
          'contact', 'punch', 'defrost', 'charge', 'bite', 'reflectable', 'heal']
 recoil_attributes = ['damage', 'type', 'condition']
+z_move = ['boosts', 'crystal', 'effect', 'base_power']
 move_dex = {}
 
 Move = namedtuple('Move', move_attributes) #some missing props
 Flags = namedtuple('Flags', flags)
 Recoil = namedtuple('Recoil', recoil_attributes)
+ZMove = namedtuple('ZMove', z_move)
         
 for move in moves_raw_data:
     moves_raw_data[move]['flags'] = Flags._make([moves_raw_data[move]['flags'][flag] for flag in flags])
     moves_raw_data[move]['recoil'] = Recoil._make([moves_raw_data[move]['recoil'][attribute] for attribute in recoil_attributes])
+    moves_raw_data[move]['z_move'] = ZMove._make([moves_raw_data[move]['z_move'][attribute] for attribute in z_move])
     move_dex[move] = Move._make([moves_raw_data[move][attribute] for attribute in move_attributes])
 
+zmove_chart = {
+    'normaliumz': 'breakneckblitz',
+    'fightiniumz': 'alloutpummeling',
+    'flyiniumz': 'supersonicskystrike',
+    'poisoniumz': 'aciddownpour',
+    'groundiumz': 'tectonicrage',
+    'rockiumz': 'continentalcrush',
+    'buginiumz': 'savagespinout',
+    'ghostiumz': 'neverendingnightmare',
+    'steeliumz': 'corkscrewcrash',
+    'firiumz': 'infernooverdrive',
+    'wateriumz': 'hydrovortex',
+    'grassiumz': 'bloomdoom',
+    'electriumz': 'gigavolthavoc',
+    'psychiumz': 'shatteredpsyche',
+    'iciumz': 'subzeroslammer',
+    'dragoniumz': 'devastatingdrake',
+    'darkiniumz': 'blackholeeclipse',
+    'fariumz': 'twinkletackle'
+}
 
 #--------
 #TypeChart
@@ -126,6 +229,36 @@ for i in typecharts_raw_data:
 #                typecharts_raw_data[i][a] = DamageTaken._make([typecharts_raw_data[i][a][j] for j in damagetakenAttributes])
 
     typechart_dex[i] = TypeChart._make([typecharts_raw_data[i][j] for j in typechartAttributes])
+
+
+#--------
+#natures_raw_data
+#---------
+natureAttributes = ['id', 'num', 'name', 'plus', 'minus']
+nature_dex = {}
+
+temp = ['id', 'num', 'name', 'plus', 'minus', 'values']
+Nature = namedtuple('Nature', temp)
+
+for i in natures_raw_data:
+    for a in natureAttributes:
+        if a not in natures_raw_data[i]:
+            natures_raw_data[i][a] = None
+
+    args = [natures_raw_data[i][j] for j in natureAttributes]
+
+    values = {}
+    stats = ['attack', 'defense', 'specialattack', 'specialdefense', 'speed']
+    for stat in stats:
+        if args[3] == stat:
+            values[stat] = 1.1
+        elif args[4] == stat:
+            values[stat] = 0.9
+        else:
+            values[stat] = 1
+    args.append(values)
+
+    nature_dex[i] = Nature._make(args)
 
 
 #---------------------
@@ -180,6 +313,12 @@ boosts = {
     6: 4.0,
 }
 
+crit = {
+    0: 1/24,
+    1: 1/8,
+    2: 1/2,
+    3: 1
+}
 no_metronome = {
     "afteryou",
     "assist",
@@ -243,6 +382,19 @@ no_metronome = {
 }
 
 # i shouldn't be using this, instead, i should be using the info in items.json
+fling = {
+    'flameorb': 30,
+    'kingsrock': 30,
+    'lightball': 30,
+    'mentalherb': 10,
+    'poisonbarb': 70,
+    'razorfang': 30,
+    'toxicorb': 30,
+    'whiteherb': 10,
+    'ironball': 130,
+    'hardstone': 100,
+    'rarebone': 100,
+}
 
 type_resist_berries = {
     'occaberry': 'Fire',

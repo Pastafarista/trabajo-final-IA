@@ -17,3 +17,7 @@ venv.bak/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+
+# Sevidor local de pokemon showdown
+pokemon-showdown
+

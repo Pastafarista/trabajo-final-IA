@@ -4,9 +4,9 @@
     "ability": "ironbarbs",
     "nature": "sassy",
     "moves": [
-        "spikes",
-        "leechseed",
-        "gyroball",
+        "earthquake",
+        "absorb",
+        "ironhead",
         "protect"
     ],
     "evs": [

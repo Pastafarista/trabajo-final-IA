@@ -210,7 +210,7 @@ def calc_damage(B:Battle, user:Pokemon, move:dex.Move, target:Pokemon) -> int:
             modifier *= 1.5
 
     # burn
-    if user.status == 'brn' and move.category == 'Physical' and user.ability != 'guts':
+    if user.status == 'brn' and move.category == 'Physical':
         modifier *= 0.5
     
     dmg = math.floor(dmg)
@@ -429,7 +429,7 @@ def update_move_before_running(B:Battle, user:Pokemon, move:dex.Move, target:Pok
     elif move.id == 'gyroball':
         target_player = (B.p1 if target.player_uid == 1 else B.p2)
         user_player = (B.p1 if user.player_uid == 1 else B.p2)
-        power = math.floor(25 * (get_speed(target, B.weather, B.terrain, B.trickroom, target_player.tailwind) / get_speed(user, B.weather, B.terrain, B.trickroom, user_player.tailwind)))
+        power = math.floor(25 * (get_speed(target, B.trickroom, target_player.tailwind) / get_speed(user, B.weather, B.terrain, B.trickroom, user_player.tailwind)))
         if power < 1:
             power = 1
         move = move._replace(base_power = power)

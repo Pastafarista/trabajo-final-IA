@@ -4,7 +4,7 @@
     "ability": "beastboost",
     "nature": "sassy",
     "moves": [
-        "leechseed",
+        "absorb",
         "protect",
         "heavyslam",
         "flamethrower"

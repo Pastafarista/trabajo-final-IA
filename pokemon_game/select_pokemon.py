@@ -19,6 +19,7 @@ def create_team(num_pokemons):
 
         pokemon = {}
         pokemon['species'] = selected_pokemon
+        pokemon['name'] = selected_pokemon
 
         with open(POKEMON_DIR + selected_pokemon + '.json') as pokemon_file:
             general_pokemon = json.load(pokemon_file)
@@ -33,4 +34,5 @@ def create_team(num_pokemons):
 
         team.append(pokemon)
 
+    return team
            

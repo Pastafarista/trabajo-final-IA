@@ -789,12 +789,18 @@ def create_move(B:Battle, p:Pokemon, c:Decision) -> dex.Move:
     '''
     if c.type != 'move':
         return
-    
-    if p.pp[p.moves[c.selection]] <= 0:
+
+    print("Moves: ", p.moves)
+    print("Selection: ", c.selection)
+    print("Type: ", type(c.selection))
+
+    selection = int(c.selection)
+
+    if p.pp[p.moves[selection]] <= 0:
         move = dex.move_dex['struggle']
         return move
 
-    move = dex.move_dex[p.moves[c.selection]]
+    move = dex.move_dex[p.moves[selection]]
 
     # encore overwrites move decision
     if 'encore' in p.volatile_statuses and p.last_used_move is not None:

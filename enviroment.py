@@ -3,11 +3,14 @@
 
 import os
 import json
+import sys
 
-class Enviroment():
-    def __init__(self):
-        # cargamos los datos de los pokemons y los movimientos
-        self.pokemons, self.moves = map_data()        
+# añadimos el directorio pokemon_game al path para poder importar los modulos
+PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(1, PATH + "/pokemon_game")
+
+import pokemon_game.simulator as sim
+from pokemon_game.select_pokemon import create_team
 
 def map_data():
     POKEMON_DIR = "data/pokemons/"
@@ -37,8 +40,31 @@ def map_data():
 
     return pokemons, moves
 
-# testeo
+class Enviroment():
+    def __init__(self):
+        # cargamos los datos de los pokemons y los movimientos
+        self.pokemons, self.moves = map_data()
+
+# test
 if __name__ == "__main__":
-    pokemons, moves = map_data()
-    print(pokemons)
-    print(moves)
+       
+    env = Enviroment()
+
+    # creamos los equipos de 6 pokemons
+    pokemons = ['clawitzer' , 'zeraora', 'haxorus', 'aurorus', 'decidueye', 'delphox']
+
+    team_1 = create_team(pokemons)
+    team_2 = create_team(pokemons)
+    
+    # creamos la batalla
+    battle = sim.Battle('single', 'prueba', team_1, 'prueba2', team_2, debug = True)
+
+    # los jugadores eligen los movimientos
+    sim.decide(battle.p1, 1)
+    sim.decide(battle.p2, 1)
+
+    # ejecutamos el turno
+    sim.do_turn(battle)
+
+
+

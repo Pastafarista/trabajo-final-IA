@@ -1,6 +1,6 @@
 from typing import List, Set, Dict, Any, Tuple, NewType
 from dataclasses import dataclass, field, InitVar
-from data import dex
+import dex
 import math
 
 @dataclass

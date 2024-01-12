@@ -1,5 +1,7 @@
 import random, json
 
+POKEMON_DIR = "data/pokemons/"
+
 def create_team(num_pokemons):
     pokemons = ['clawitzer' , 'zeraora', 'haxorus', 'aurorus', 'decidueye', 'delphox', 'toxapex', 'volcarona', 'spiritomb', 'hydreigon', 'ambipom', 
                'celesteela', 'togekiss', 'stakataka', 'aegislash', 'ferrothorn', 'audino', 'keldeo', 'excadrill', 'mimikyu', 'bisharp', 
@@ -8,12 +10,12 @@ def create_team(num_pokemons):
     team = []
 
     for i in range(num_pokemons):
-        selected_pokemon = pokemons[random.ranint(len(pokemons) - 1)]
+        selected_pokemon = pokemons[random.randint(0,len(pokemons) - 1)]
 
         pokemon = {}
         pokemon['species'] = selected_pokemon
 
-        with open(selected_pokemon + '.json') as pokemon_file:
+        with open(POKEMON_DIR + selected_pokemon + '.json') as pokemon_file:
             general_pokemon = json.load(pokemon_file)
 
             moves = general_pokemon['moves']

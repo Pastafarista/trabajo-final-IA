@@ -189,7 +189,7 @@ def calc_damage(B:Battle, user:Pokemon, move:dex.Move, target:Pokemon) -> int:
     #Formula para calcular el daño 
     dmg = (math.floor(math.floor(math.floor(((2 * user.level) / 5) + 2) * attack * power / defense) / 50) + 2) 
 
-    if move.type in user.type:
+    if move.type in user.types:
         modifier *= 1.5
 
     for each in target.types:
@@ -810,7 +810,9 @@ def populate_action_queue(q:List, p:Pokemon, c:Decision, m:dex.Move, T:Player, B
     if c.type == 'move':
         a = Action('move', user=p, move=m, target=c.target)
 
-    return
+    q.append(a)
+
+    return q
 
 def resolve_priority(action, B:Battle, T:Player) -> float:
     action_priority_tier : int = None

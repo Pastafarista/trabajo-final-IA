@@ -60,7 +60,7 @@ def do_turn(B:Battle) -> None:
         print(q)
         print()
     while q:
-        priority, next_action = heapq.heappop(q) 
+        next_action = heapq.heappop(q) 
         run_action(B, next_action)
     
     if not B.pseudo_turn:

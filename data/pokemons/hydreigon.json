@@ -3,10 +3,30 @@
     "item": "choicescarf",
     "ability": "levitate",
     "nature": "timid",
-    "moves": ["dracometeor", "darkpulse", "megahorn", "fireblast"],
-    "evs": [0, 0, 4, 252, 0, 252],
-    "ivs": [31, 31, 31, 31, 31, 31],
+    "moves": [
+        "dracometeor",
+        "darkpulse",
+        "megahorn",
+        "fireblast"
+    ],
+    "evs": [
+        0,
+        0,
+        4,
+        252,
+        0,
+        252
+    ],
+    "ivs": [
+        31,
+        31,
+        31,
+        31,
+        31,
+        31
+    ],
     "gender": "female",
     "level": 100,
-    "shiny": true
+    "shiny": true,
+    "name": "hydreigon"
 }

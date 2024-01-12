@@ -3,10 +3,30 @@
     "item": "colburberry",
     "ability": "longreach",
     "nature": "calm",
-    "moves": ["defog", "grassknot", "roost", "spiritshackle"],
-    "evs": [0, 0, 4, 252, 0, 252],
-    "ivs": [31, 31, 31, 31, 31, 31],
+    "moves": [
+        "defog",
+        "grassknot",
+        "roost",
+        "spiritshackle"
+    ],
+    "evs": [
+        0,
+        0,
+        4,
+        252,
+        0,
+        252
+    ],
+    "ivs": [
+        31,
+        31,
+        31,
+        31,
+        31,
+        31
+    ],
     "gender": "female",
     "level": 100,
-    "shiny": true
+    "shiny": true,
+    "name": "decidueye"
 }

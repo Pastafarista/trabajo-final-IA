@@ -3,10 +3,30 @@
     "item": "blacksludge",
     "ability": "regenerator",
     "nature": "calm",
-    "moves": ["scald", "haze", "recover", "toxic"],
-    "evs": [252, 0, 4, 0, 0, 252],
-    "ivs": [31, 31, 31, 31, 31, 31],
+    "moves": [
+        "scald",
+        "haze",
+        "recover",
+        "toxic"
+    ],
+    "evs": [
+        252,
+        0,
+        4,
+        0,
+        0,
+        252
+    ],
+    "ivs": [
+        31,
+        31,
+        31,
+        31,
+        31,
+        31
+    ],
     "gender": "female",
     "level": 100,
-    "shiny": true
-} 
+    "shiny": true,
+    "name": "toxapex"
+}

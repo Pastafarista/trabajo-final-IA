@@ -3,10 +3,30 @@
     "item": "leftovers",
     "ability": "hugepower",
     "nature": "adamant",
-    "moves": ["bellydrum", "aquajet", "playrough", "knockoff"],
-    "evs": [4, 252, 0, 0, 0, 252],
-    "ivs": [31, 31, 31, 31, 31, 31],
+    "moves": [
+        "bellydrum",
+        "aquajet",
+        "playrough",
+        "knockoff"
+    ],
+    "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+    ],
+    "ivs": [
+        31,
+        31,
+        31,
+        31,
+        31,
+        31
+    ],
     "gender": "female",
     "level": 100,
-    "shiny": true
+    "shiny": true,
+    "name": "azumarill"
 }

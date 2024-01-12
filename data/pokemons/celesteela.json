@@ -3,10 +3,30 @@
     "item": "leftovers",
     "ability": "beastboost",
     "nature": "sassy",
-    "moves": ["leechseed", "protect", "heavyslam", "flamethrower"],
-    "evs": [248, 0, 28, 0, 0, 232],
-    "ivs": [31, 31, 31, 31, 31, 31],
+    "moves": [
+        "leechseed",
+        "protect",
+        "heavyslam",
+        "flamethrower"
+    ],
+    "evs": [
+        248,
+        0,
+        28,
+        0,
+        0,
+        232
+    ],
+    "ivs": [
+        31,
+        31,
+        31,
+        31,
+        31,
+        31
+    ],
     "gender": "",
     "level": 100,
-    "shiny": true
-} 
+    "shiny": true,
+    "name": "celesteela"
+}

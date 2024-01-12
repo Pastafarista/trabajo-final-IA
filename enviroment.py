@@ -6,7 +6,8 @@ import json
 
 class Enviroment():
     def __init__(self):
-        pass
+        # cargamos los datos de los pokemons y los movimientos
+        self.pokemons, self.moves = map_data()        
 
 def map_data():
     POKEMON_DIR = "data/pokemons/"

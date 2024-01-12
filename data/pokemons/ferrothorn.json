@@ -3,10 +3,30 @@
     "item": "leftovers",
     "ability": "ironbarbs",
     "nature": "sassy",
-    "moves": ["spikes", "leechseed", "gyroball", "protect"],
-    "evs": [252, 0, 24, 0, 232, 0],
-    "ivs": [31, 31, 31, 31, 31, 31],
+    "moves": [
+        "spikes",
+        "leechseed",
+        "gyroball",
+        "protect"
+    ],
+    "evs": [
+        252,
+        0,
+        24,
+        0,
+        232,
+        0
+    ],
+    "ivs": [
+        31,
+        31,
+        31,
+        31,
+        31,
+        31
+    ],
     "gender": "",
     "level": 100,
-    "shiny": true
+    "shiny": true,
+    "name": "ferrothorn"
 }

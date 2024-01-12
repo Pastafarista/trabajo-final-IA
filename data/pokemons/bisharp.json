@@ -3,10 +3,30 @@
     "item": "dreadplate",
     "ability": "justified",
     "nature": "adamant",
-    "moves": ["swordsdance", "knockoff", "ironhead", "suckerpunch"],
-    "evs": [0, 252, 0, 0, 4, 252],
-    "ivs": [31, 31, 31, 31, 31, 31],
+    "moves": [
+        "swordsdance",
+        "knockoff",
+        "ironhead",
+        "suckerpunch"
+    ],
+    "evs": [
+        0,
+        252,
+        0,
+        0,
+        4,
+        252
+    ],
+    "ivs": [
+        31,
+        31,
+        31,
+        31,
+        31,
+        31
+    ],
     "gender": "female",
     "level": 100,
-    "shiny": true
+    "shiny": true,
+    "name": "bisharp"
 }

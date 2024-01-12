@@ -3,10 +3,30 @@
     "item": "lifeorb",
     "ability": "technician",
     "nature": "jolly",
-    "moves": ["fakeout", "return", "lowkick", "pursuit"],
-    "evs": [0, 252, 4, 0, 0, 252],
-    "ivs": [31, 31, 31, 31, 31, 31],
+    "moves": [
+        "fakeout",
+        "return",
+        "lowkick",
+        "pursuit"
+    ],
+    "evs": [
+        0,
+        252,
+        4,
+        0,
+        0,
+        252
+    ],
+    "ivs": [
+        31,
+        31,
+        31,
+        31,
+        31,
+        31
+    ],
     "gender": "female",
     "level": 100,
-    "shiny": true
+    "shiny": true,
+    "name": "ambipom"
 }

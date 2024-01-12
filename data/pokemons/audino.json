@@ -3,10 +3,30 @@
     "item": "leftovers",
     "ability": "regenerator",
     "nature": "calm",
-    "moves": ["wish", "protect", "toxic", "knockoff"],
-    "evs": [252, 0, 4, 0, 252, 0],
-    "ivs": [31, 31, 31, 31, 31, 31],
+    "moves": [
+        "wish",
+        "protect",
+        "toxic",
+        "knockoff"
+    ],
+    "evs": [
+        252,
+        0,
+        4,
+        0,
+        252,
+        0
+    ],
+    "ivs": [
+        31,
+        31,
+        31,
+        31,
+        31,
+        31
+    ],
     "gender": "female",
     "level": 100,
-    "shiny": true
+    "shiny": true,
+    "name": "audino"
 }

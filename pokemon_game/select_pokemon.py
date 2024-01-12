@@ -1,6 +1,11 @@
 import random, json
+import os
 
-POKEMON_DIR = "data/pokemons/"
+# Directorio padre
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Directorio de los archivos de los pokemons
+POKEMON_DIR = os.path.join(BASE_DIR, 'data/pokemons/')
 
 def create_team(num_pokemons):
     pokemons = ['clawitzer' , 'zeraora', 'haxorus', 'aurorus', 'decidueye', 'delphox', 'toxapex', 'volcarona', 'spiritomb', 'hydreigon', 'ambipom', 

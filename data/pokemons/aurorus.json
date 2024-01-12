@@ -3,10 +3,30 @@
     "item": "choicespecs",
     "ability": "refrigerate",
     "nature": "modest",
-    "moves": ["blizzard", "freezedry", "earthpower", "hiddenpowerrock"],
-    "evs": [0, 0, 0, 252, 4, 252],
-    "ivs": [31, 31, 31, 31, 31, 31],
+    "moves": [
+        "blizzard",
+        "freezedry",
+        "earthpower",
+        "hiddenpowerrock"
+    ],
+    "evs": [
+        0,
+        0,
+        0,
+        252,
+        4,
+        252
+    ],
+    "ivs": [
+        31,
+        31,
+        31,
+        31,
+        31,
+        31
+    ],
     "gender": "female",
     "level": 100,
-    "shiny": true
-} 
+    "shiny": true,
+    "name": "aurorus"
+}

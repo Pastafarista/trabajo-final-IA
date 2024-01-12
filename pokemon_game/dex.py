@@ -3,19 +3,25 @@ import time
 from collections import namedtuple
 import random
 import re
-
+import os
 
 #this module is for searching the dex, aka all the game data
 
 #missing statuses, scripts, rulesets(formats), formatsdata( event pokemon and thespeed move_dex), aliases
 
-with open('data/moves.json') as f:
+# direcorio padre
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# path al folder ../data
+PATH = os.path.join(BASE_DIR, 'data/')
+
+with open(PATH + 'moves.json') as f:
     moves_raw_data = json.load(f)
-with open('data/pokedex.json') as f:
+with open(PATH + 'pokedex.json') as f:
     pokemon_raw_data = json.load(f)
-with open('data/typechart.json') as f:
+with open(PATH + 'typechart.json') as f:
     typecharts_raw_data = json.load(f)
-with open('data/all.json') as f:
+with open(PATH + 'all.json') as f:
     pokemon_raw_base = json.load(f)
 
 # target can be : 'foe0', 'foe1', 'ally', 'self', 'foes', 'allies', 'adjacent', 'all'

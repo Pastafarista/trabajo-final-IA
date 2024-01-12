@@ -3,10 +3,30 @@
     "item": "lifeorb",
     "ability": "disguise",
     "nature": "adamant",
-    "moves": ["swordsdance", "shadowclaw", "playrough", "shadowsneak"],
-    "evs": [0, 252, 4, 0, 0, 252],
-    "ivs": [31, 31, 31, 31, 31, 31],
+    "moves": [
+        "swordsdance",
+        "shadowclaw",
+        "playrough",
+        "shadowsneak"
+    ],
+    "evs": [
+        0,
+        252,
+        4,
+        0,
+        0,
+        252
+    ],
+    "ivs": [
+        31,
+        31,
+        31,
+        31,
+        31,
+        31
+    ],
     "gender": "female",
     "level": 100,
-    "shiny": true
+    "shiny": true,
+    "name": "mimikyu"
 }

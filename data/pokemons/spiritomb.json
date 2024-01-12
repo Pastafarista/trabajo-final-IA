@@ -3,10 +3,30 @@
     "item": "blackglasses",
     "ability": "infiltrator",
     "nature": "adamant",
-    "moves": ["pursuit", "suckerpunch", "foulplay", "willowisp"],
-    "evs": [248, 252, 8, 0, 0, 0],
-    "ivs": [31, 31, 31, 31, 31, 31],
+    "moves": [
+        "pursuit",
+        "suckerpunch",
+        "foulplay",
+        "willowisp"
+    ],
+    "evs": [
+        248,
+        252,
+        8,
+        0,
+        0,
+        0
+    ],
+    "ivs": [
+        31,
+        31,
+        31,
+        31,
+        31,
+        31
+    ],
     "gender": "",
     "level": 100,
-    "shiny": true
+    "shiny": true,
+    "name": "spiritomb"
 }

@@ -3,31 +3,37 @@ import time
 from collections import namedtuple
 import random
 import re
+import os
 
+# directorio padre
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# directorio de la carpeta data
+DATA_DIR = os.path.join(BASE_DIR, 'data')
 
 #this module is for searching the dex, aka all the game data
 
 #missing statuses, scripts, rulesets(formats), formatsdata( event pokemon and thespeed move_dex), aliases
 
-with open('data/abilities.json') as f:
+with open(DATA_DIR + '/abilities.json') as f:
     abilities_raw_data = json.load(f)
-with open('data/formats.json') as f:
+with open(DATA_DIR + '/formats.json') as f:
     formats_raw_data = json.load(f)
-with open('data/items.json') as f:
+with open(DATA_DIR + '/items.json') as f:
     items_raw_data = json.load(f)
-with open('data/moves.json') as f:
+with open(DATA_DIR + '/moves.json') as f:
     moves_raw_data = json.load(f)
-with open('data/pokedex.json') as f:
+with open(DATA_DIR + '/pokedex.json') as f:
     pokemon_raw_data = json.load(f)
-with open('data/typechart.json') as f:
+with open(DATA_DIR + '/typechart.json') as f:
     typecharts_raw_data = json.load(f)
-with open('data/natures.json') as f:
+with open(DATA_DIR + '/natures.json') as f:
     natures_raw_data = json.load(f)
-with open('data/simple_learnsets.json') as f:
+with open(DATA_DIR + '/simple_learnsets.json') as f:
     simple_learnsets = json.load(f)
-with open('data/sample_teams.json') as f:
+with open(DATA_DIR + '/sample_teams.json') as f:
     sample_teams = json.load(f)
-with open('data/all.json') as f:
+with open(DATA_DIR + '/all.json') as f:
     pokemon_raw_base = json.load(f)
 
 sample_teams = sample_teams

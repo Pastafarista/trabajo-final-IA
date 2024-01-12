@@ -274,8 +274,7 @@ def calculate_stats(P:Pokemon, evs:List[int], ivs:List[int]) -> Stats:
         base = getattr(base_stats, stat)
         iv = ivs[i]
         ev = evs[i]
-        nature_mod = dex.nature_dex[P.nature].values[stat]
-        cal.append(math.floor(math.floor((((iv + (2 * base) + (ev/4)) * (lvl/100)) + 5)) * nature_mod))
+        cal.append(math.floor(math.floor((((iv + (2 * base) + (ev/4)) * (lvl/100)) + 5))))
         i += 1
 
     return Stats(hp, cal[0], cal[1], cal[2], cal[3], cal[4])

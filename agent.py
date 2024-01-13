@@ -11,6 +11,7 @@ from environment import Environment
 from model import Linear_QNet, QTrainer
 import sys
 from matplotlib import pyplot as plt
+import datetime
 
 PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, PATH + "/pokemon_game")
@@ -55,23 +56,29 @@ class Agent:
         self.numero_partidas = 0
         self.epsilon = 0 # aleatoriedad
         self.gamma = 0.9 # discount rate
-        self.memory = deque(maxlen=MAX_MEMORY) # cola de memoria doble (se puede añadir y quitar por ambos lados)
         self.pokemons, self.moves = Agent.map_data() # diccionarios con los pokemons y los movimientos
-        self.model = Linear_QNet(12, 256, 4) # 12 -> tamaño del estado, 256 -> tamaño de la capa oculta, 4 -> numero de movimientos
-        self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
 
+        # Modelos de los jugadores
+        self.model_p1 = Linear_QNet(12, 256, 4) # 12 -> tamaño del estado, 256 -> tamaño de la capa oculta, 4 -> numero de movimientos
+        self.model_p2 = Linear_QNet(12, 256, 4)
+        
+        # Entrenadores de los jugadores
+        self.trainer_p1 = QTrainer(self.model_p1, lr=LR, gamma=self.gamma)
+        self.trainer_p2 = QTrainer(self.model_p2, lr=LR, gamma=self.gamma)
+
+        # Memoria de los jugadores
+        self.memory_p1 = deque(maxlen=MAX_MEMORY)
+        self.memory_p2 = deque(maxlen=MAX_MEMORY)
     '''
     Funcion que optiene el estado del juego en el que se encuentra el agente:
         [nom_poke_p1, hp_poke_p1, move_1_poke_p1, move_2_poke_p1, move_3_poke_p1, move_4_poke_p1, 
         nom_poke_p2, hp_poke_p2, move_1_poke_p2, move_2_poke_p2, move_3_poke_p2, move_4_poke_p2]
     '''
     def get_state(self, env):
-
         game = env.battle
         
         state = []
         for player in [game.p1, game.p2]:
-            
             pokemon = player.active_pokemon[0]
 
             state.append(self.pokemons[pokemon.species])
@@ -85,32 +92,32 @@ class Agent:
     '''
     Funcion que guarda en la memoria del agente el estado, la accion, la recompensa, el siguiente estado y si el juego ha terminado
     '''
-    def remember(self, state, action, reward, next_state, done):    
-        pass
-        self.memory.append((state, action, reward, next_state, done)) # popleft if MAX_MEMORY is reached
+    def remember(self, state, actions, rewards, next_state, done):    
+        self.memory_p1.append((state, actions[0], rewards[0], next_state, done))
+        self.memory_p2.append((state, actions[1], rewards[1], next_state, done))
     
     '''
     Funcion que entrena al agente cuando a terminado una partida
     '''
     def train_long_memory(self):
+        for trainer, memory in ( (self.trainer_p1, self.memory_p1), (self.trainer_p2, self.memory_p2) ):
+            # Cogemos una muestra aleatoria de la memoria (una tupla de 5 elementos)
+            if len(memory) > BATCH_SIZE:
+                mini_sample = random.sample(memory, BATCH_SIZE)
+            else:
+                mini_sample = memory
 
-        # Cogemos una muestra aleatoria de la memoria (una tupla de 5 elementos)
-        if len(self.memory) > BATCH_SIZE:
-            mini_sample = random.sample(self.memory, BATCH_SIZE)
-        else:
-            mini_sample = self.memory
+            # Descomprimimos la muestra en 5 listas
+            states, actions, rewards, next_states, dones = zip(*mini_sample)
 
-        # Descomprimimos la muestra en 5 listas
-        states, actions, rewards, next_states, dones = zip(*mini_sample)
-
-        self.trainer.train_step(states, actions, rewards, next_states, dones)
+            trainer.train_step(states, actions, rewards, next_states, dones)
 
     '''
     Funcion que entrena al agente en cada paso del juego
     '''
-    def train_short_memory(self, state, action, reward, next_state, done):
-        pass
-        self.trainer.train_step(state, action, reward, next_state, done)
+    def train_short_memory(self, state, actions, rewards, next_state, done):
+        self.trainer_p1.train_step(state, actions[0], rewards[0], next_state, done)
+        self.trainer_p2.train_step(state, actions[1], rewards[1], next_state, done)
 
     '''
     Funcion que devuelve la accion que el agente va a realizar
@@ -118,26 +125,30 @@ class Agent:
     def get_action(self, state):
         # Epsilon contra la exploracion/exploitacion del agente, cuantas mas partidas lleve menos exploracion y mas exploitacion
         self.epsilon = 80 - self.numero_partidas 
-        final_move = -1 
 
-        final_move = np.zeros(4)
+        # Lista con los movimientos de cada jugador
+        player_moves = []
+        
+        for model in [self.model_p1, self.model_p2]:
+            final_move = np.zeros(4)
 
-        if random.randint(0, 200) < self.epsilon:
-            move = random.randint(0, 3)
-            final_move[move] = 1
-        else:
-            state0 = torch.tensor(state, dtype=torch.float)
-            prediction = self.model(state0)
-            move = torch.argmax(prediction).item()
-            final_move[move] = 1
-            pass
+            if random.randint(0, 200) < self.epsilon:
+                move = random.randint(0, 3)
+                final_move[move] = 1
+            else:
+                state0 = torch.tensor(state, dtype=torch.float)
+                prediction = model(state0)
+                move = torch.argmax(prediction).item()
+                final_move[move] = 1
+                
+            player_moves.append(final_move)
 
-        return final_move
+        return player_moves
 
 '''
 Funcion con la que entrenamos el modelo de RL
 '''
-def train(pokemon1:str, pokemon2:str) -> None:
+def train(pokemon1:str, pokemon2:str, epochs:int) -> None:
     agent = Agent()
     env = Environment(pokemon1, pokemon2)
     
@@ -147,31 +158,28 @@ def train(pokemon1:str, pokemon2:str) -> None:
     last_victories_p1 = 0
     last_victories_p2 = 0
 
-    record_win = 0
+    record_win_p1 = 0
+    record_win_p2 = 0
+    start_time = datetime.datetime.now()
     
     while True:
         # obtener estado antiguo
         state_old = agent.get_state(env)
 
         # obtener movimiento
-        final_move = agent.get_action(state_old)
-
-        enemy_action = random.randint(0, 3)
-
-        # realizar movimiento y obtener nuevo estado     
+        final_moves = agent.get_action(state_old)
 
         # traducir el movimiento [0, 0, 0, 1] -> 3
-
-        reward, done, winner  = env.step(np.argmax(final_move), enemy_action)
+        rewards, done, winner  = env.step(np.argmax(final_moves[0]), np.argmax(final_moves[1]))
         state_new = agent.get_state(env)
         
-        print(f"Partida: {agent.numero_partidas} - Recompensa: {reward}")
+        print(f"Partida: {agent.numero_partidas} - Recompensas: {rewards}")
         
         # entrenar al agente con el nuevo estado (short memory)
-        agent.train_short_memory(state_old, final_move, reward, state_new, done)
+        agent.train_short_memory(state_old, final_moves, rewards, state_new, done)
 
         # guardar en la memoria del agente el estado, la accion, la recompensa, el siguiente estado y si el juego ha terminado
-        agent.remember(state_old, final_move, reward, state_new, done)
+        agent.remember(state_old, final_moves, rewards, state_new, done)
  
         if done:
             # entrenar al agente con todos los estados (long memory), resetear el juego y actualizar el record
@@ -188,16 +196,21 @@ def train(pokemon1:str, pokemon2:str) -> None:
                 p1_wins_graph.append(last_victories_p1 / 100)
                 p2_wins_graph.append(last_victories_p2 / 100)
 
-                if record_win < p1_wins_graph[-1]:
-                    record_win = p1_wins_graph[-1]
-                    agent.model.save(file_name=f"{pokemon1}-vs-{pokemon2}.pth")
+                if record_win_p1 < p1_wins_graph[-1]:
+                    record_win_p1 = p1_wins_graph[-1]
+                    agent.model_p1.save(file_name=f"[{pokemon1}]-vs-{pokemon2}.pth")
+
+                if record_win_p2 < p2_wins_graph[-1]:
+                    record_win_p2 = p2_wins_graph[-1]
+                    agent.model_p2.save(file_name=f"{pokemon2}-vs-[{pokemon1}].pth")
 
                 last_victories_p1 = 0
                 last_victories_p2 = 0
 
-        if agent.numero_partidas == 10000:
+        if agent.numero_partidas == epochs:
             break 
 
+    # grafico
     time = np.arange(1, agent.numero_partidas/100 + 1)
     plt.plot(time, p1_wins_graph, label=f"{pokemon1}") 
     plt.plot(time, p2_wins_graph, label=f"{pokemon2}")
@@ -207,5 +220,12 @@ def train(pokemon1:str, pokemon2:str) -> None:
     plt.legend()
     plt.savefig(f"model/{pokemon1}-vs-{pokemon2}.png")
 
+    # mostrar tiempo de entrenamiento y mejor modelo
+    end_time = datetime.datetime.now()
+    
+    print(f"Tiempo de entrenamiento: {end_time - start_time}")
+    print(f"Mejor modelo de {pokemon1}: {record_win_p1}")
+    print(f"Mejor modelo de {pokemon2}: {record_win_p2}")
+
 if __name__ == '__main__':
-    train("stakataka", "keldeo")
+    train("raichu", "raichu", 1000)

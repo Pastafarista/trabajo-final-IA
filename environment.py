@@ -89,6 +89,8 @@ class Environment():
         # calculamos la recompensa
         reward_p1 = (hp_p2 - hp_p2_new) / self.battle.p1.active_pokemon[0].maxhp * 10 - (hp_p1 - hp_p1_new) / self.battle.p1.active_pokemon[0].maxhp * 10 # máximo de 10pts
 
+        reward_p2 = (hp_p1 - hp_p1_new) / self.battle.p2.active_pokemon[0].maxhp * 10 - (hp_p2 - hp_p2_new) / self.battle.p2.active_pokemon[0].maxhp * 10 # máximo de 10pts
+
         # calculamos si el juego ha terminado
         done = self.battle.ended
 
@@ -98,13 +100,13 @@ class Environment():
             if self.battle.winner == 'p1':
                 reward_p1 += 20
                 winner = 0
-                # reward_p2 += -10
+                reward_p2 += -20
             else:
                 reward_p1 += -20
                 winner = 1
-                # reward_p2 += 10
+                reward_p2 += 20
 
-        return reward_p1, done, winner
+        return (reward_p1, reward_p2), done, winner
 
     # devuelve una lista con los nombres de los pokemons de los equipos
     @classmethod

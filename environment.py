@@ -46,15 +46,14 @@ class Environment():
 
         return pokemons, moves
 
-
-
-    def __init__(self, team_p1:int, team_p2:int):
+    def __init__(self, pokemon_p1:str, pokemon_p2:str):
         # cargamos los datos de los pokemons y los movimientos
         self.pokemons, self.moves = Environment.map_data()
         teams = Environment.get_teams()
        
-        team_p1 = create_team(teams[team_p1])
-        team_p2 = create_team(teams[team_p2])
+        # creamos los equipos de un solo pokemon (el código estaba pensado para equipos de más de un pokemon)
+        team_p1 = create_team([pokemon_p1])
+        team_p2 = create_team([pokemon_p2])
 
         # instanciamos la batalla
         self.battle =  sim.Battle('single', 'equipo_1', team_p1, 'equipo_2', team_p2, debug = True)
@@ -133,5 +132,4 @@ class Environment():
                 teams.append(team)
 
         return teams
-
 

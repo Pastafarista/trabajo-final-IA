@@ -14,11 +14,6 @@ import sys
 PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, PATH + "/pokemon_game")
 
-import pokemon_game.simulator as sim
-from pokemon_game.select_pokemon import create_team
-
-
-
 MAX_MEMORY = 100_000
 BATCH_SIZE = 1000
 LR = 0.001
@@ -141,9 +136,9 @@ class Agent:
 '''
 Funcion con la que entrenamos el modelo de RL
 '''
-def train():
+def train(pokemon1:str, pokemon2:str) -> None:
     agent = Agent()
-    env = Environment(1, 1)
+    env = Environment(pokemon1, pokemon2)
 
     while True:
         # obtener estado antiguo
@@ -176,7 +171,7 @@ def train():
  
         if done:
             # entrenar al agente con todos los estados (long memory), resetear el juego y actualizar el record
-            env = Environment(1, 1)
+            env = Environment(pokemon1, pokemon2)
             agent.numero_partidas += 1
             agent.train_long_memory()
             
@@ -184,8 +179,8 @@ def train():
             print('Partida', agent.numero_partidas)
 
         if agent.numero_partidas == 1000:
-            agent.model.save()
+            agent.model.save(file_name=f"{pokemon1}-vs-{pokemon2}.pth")
             break 
 
 if __name__ == '__main__':
-    train()
+    train("raichu", "keldeo")

@@ -46,7 +46,7 @@ def create_team(pokemons:list[str]) -> list[dict]:
 
     for pokemon in pokemons:
         selected_pokemon = pokemon
-
+        print(selected_pokemon)
         pokemon = {}
         pokemon['species'] = selected_pokemon
         pokemon['name'] = selected_pokemon

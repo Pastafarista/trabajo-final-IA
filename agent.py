@@ -2,8 +2,8 @@
 # Description: El agente se encargará de comunicar el entorno con el modelo de aprendizaje, también se encargará de entrenar al modelo y de realizar las predicciones.
 
 import random
-import numpy as np
 from collections import deque
+from environment import Environment
 
 MAX_MEMORY = 100_000
 BATCH_SIZE = 1000
@@ -83,7 +83,7 @@ def train():
     plot_mean_scores = []
     total_score = 0
     agent = Agent()
-    #TODO: game = Game()
+    env = Environment(1, 1)
 
     while True:
         pass
@@ -123,4 +123,7 @@ def train():
             plot(plot_scores, plot_mean_scores)
         '''
 if __name__ == '__main__':
-    train()
+    # train()
+
+    env = Environment(1, 1)
+    print(env.get_state())

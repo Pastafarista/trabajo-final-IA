@@ -60,7 +60,7 @@ if __name__ == "__main__":
     battle = sim.Battle('single', 'prueba', team_1, 'prueba2', team_2, debug = True)
 
     # los jugadores eligen los movimientos
-    sim.decide(battle.p1, 1)
+    sim.decide(battle.p1, 2)
     sim.decide(battle.p2, 1)
 
     # ejecutamos el turno

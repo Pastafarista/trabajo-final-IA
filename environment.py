@@ -15,67 +15,7 @@ from pokemon_game.select_pokemon import create_team
 
 # clase que representa el entorno en el que se desarrolla el juego
 class Environment():
-    def __init__(self, team_p1:int, team_p2:int):
-        # cargamos los datos de los pokemons y los movimientos
-        self.pokemons, self.moves = Environment.map_data()
-        teams = Environment.get_teams()
-       
-        team_p1 = create_team(teams[team_p1])
-        team_p2 = create_team(teams[team_p2])
 
-        # instanciamos la batalla
-        self.battle =  sim.Battle('single', 'equipo_1', team_p1, 'equipo_2', team_p2, debug = True)
-        
-        # creamos el estado inicial
-        state = []
-        for player in [self.battle.p1, self.battle.p2]:
-            for pokemon in player.pokemon:
-                state.append(self.pokemons[pokemon.species])
-                state.append(pokemon.hp)
-                state.append(self.moves[pokemon.moves[0]])
-
-        self.state = np.array(state, dtype = np.int8)
-
-    def reset(self):
-        # reseteamos la batalla
-        self.battle =  sim.Battle('single', 'equipo_1', teams[team_p1], 'equipo_2', teams[team_p2], debug = True)
-
-    def step(self, action_p1:int, action_p2:int) -> None:
-        # los jugadores eligen los movimientos
-        sim.decide(self.battle.p1, action_p1)
-        sim.decide(self.battle.p2, action_p2)
-
-        # ejecutamos el turno
-        sim.do_turn(self.battle)
-
-    ''' 
-    devuelve el estado actual:
-        [nom_poke_p1, hp_poke_p1, move_1_poke_p1, move_2_poke_p1, move_3_poke_p1, move_4_poke_p1, 
-         nom_poke_p2, hp_poke_p2, move_1_poke_p2, move_2_poke_p2, move_3_poke_p2, move_4_poke_p2, ended, winner]
-    '''
-    def get_state(self): 
-        state = []
-        for player in [self.battle.p1, self.battle.p2]:
-            for pokemon in player.pokemon:
-                state.append(self.pokemons[pokemon.species])
-                state.append(pokemon.hp)
-                
-                for move in pokemon.moves:
-                    state.append(self.moves[move])
-
-        state.append(self.battle.ended)
-
-        if self.battle.ended:            
-            if self.battle.winner == 'p1':
-                state.append(1)
-            else:
-                state.append(0)
-
-        else:
-            state.append(-1)
-
-        return np.array(state, dtype = np.int8)
-    
     # devuelve dos diccionarios en los que la clave es el nombre del pokemon/movimiento y el valor es un id
     @classmethod
     def map_data(cls):
@@ -105,6 +45,64 @@ class Environment():
         moves = {move: i for i, move in enumerate(moves)}
 
         return pokemons, moves
+
+
+
+    def __init__(self, team_p1:int, team_p2:int):
+        # cargamos los datos de los pokemons y los movimientos
+        self.pokemons, self.moves = Environment.map_data()
+        teams = Environment.get_teams()
+       
+        team_p1 = create_team(teams[team_p1])
+        team_p2 = create_team(teams[team_p2])
+
+        # instanciamos la batalla
+        self.battle =  sim.Battle('single', 'equipo_1', team_p1, 'equipo_2', team_p2, debug = True)
+        
+        # creamos el estado inicial
+        state = []
+        for player in [self.battle.p1, self.battle.p2]:
+            for pokemon in player.pokemon:
+                state.append(self.pokemons[pokemon.species])
+                state.append(pokemon.hp)
+                state.append(self.moves[pokemon.moves[0]])
+
+        self.state = np.array(state, dtype = np.int8)
+
+    def reset(self):
+        # reseteamos la batalla
+        self.battle =  sim.Battle('single', 'equipo_1', teams[team_p1], 'equipo_2', teams[team_p2], debug = True)
+
+    def step(self, action_p1:int, action_p2:int):
+        # los jugadores eligen los movimientos
+        sim.decide(self.battle.p1, action_p1)
+        sim.decide(self.battle.p2, action_p2)
+
+        hp_p1 = self.battle.p1.active_pokemon[0].hp
+        hp_p2 = self.battle.p2.active_pokemon[0].hp
+
+        # ejecutamos el turno
+        sim.do_turn(self.battle)
+
+        hp_p1_new = self.battle.p1.active_pokemon[0].hp
+        hp_p2_new = self.battle.p2.active_pokemon[0].hp
+
+        # calculamos la recompensa
+        reward_p1 = (hp_p2 - hp_p2_new) / self.battle.p1.active_pokemon[0].maxhp * 10 - (hp_p1 - hp_p1_new) / self.battle.p1.active_pokemon[0].maxhp * 10
+        # reward_p2 = (hp_p2 - hp_p2_new) / self.battle.p2.active_pokemon[0].maxhp * 10 - (hp_p1_new - hp_p1) / self.battle.p2.active_pokemon[0].maxhp * 10
+
+        # calculamos si el juego ha terminado
+        done = self.battle.ended
+
+        if done:
+            if self.battle.winner == 'p1':
+                reward_p1 += 10
+                # reward_p2 += -10
+            else:
+                reward_p1 += -10
+                # reward_p2 += 10
+
+        return reward_p1, done
 
     # devuelve una lista con los nombres de los pokemons de los equipos
     @classmethod

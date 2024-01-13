@@ -98,15 +98,19 @@ class Environment():
         # calculamos si el juego ha terminado
         done = self.battle.ended
 
+        winner = -1
+
         if done:
             if self.battle.winner == 'p1':
                 reward_p1 += 10
+                winner = 0
                 # reward_p2 += -10
             else:
                 reward_p1 += -10
+                winner = 1
                 # reward_p2 += 10
 
-        return reward_p1, done
+        return reward_p1, done, winner
 
     # devuelve una lista con los nombres de los pokemons de los equipos
     @classmethod

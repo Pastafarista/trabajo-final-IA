@@ -158,7 +158,7 @@ def train():
 
         # traducir el movimiento [0, 0, 0, 1] -> 3
 
-        reward, done  = env.step(np.argmax(final_move), enemy_action)
+        reward, done, __  = env.step(np.argmax(final_move), enemy_action)
         state_new = agent.get_state(env)
         
         '''

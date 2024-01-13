@@ -7,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Directorio de los archivos de los pokemons
 POKEMON_DIR = os.path.join(BASE_DIR, 'data/pokemons/')
 
-def create_random_team(num_pokemons):
+def create_team_2(num_pokemons):
     pokemons = ['clawitzer' , 'zeraora', 'haxorus', 'aurorus', 'decidueye', 'delphox', 'toxapex', 'volcarona', 'spiritomb', 'hydreigon', 'ambipom', 
                'celesteela', 'togekiss', 'stakataka', 'aegislash', 'ferrothorn', 'audino', 'keldeo', 'excadrill', 'mimikyu', 'bisharp', 
                'garchomp', 'azumarill', 'salazzle', 'salamence', 'raichu', 'gyarados', 'chandelure', 'tapufini', 'blissey']

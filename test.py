@@ -67,9 +67,3 @@ if __name__ == '__main__':
 
     print(f'wins: {wins}, losses: {losses}')
     print(f'win rate: {wins/(wins+losses)}')
-        
-
-
-
-
-    

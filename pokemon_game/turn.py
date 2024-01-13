@@ -790,10 +790,6 @@ def create_move(B:Battle, p:Pokemon, c:Decision) -> dex.Move:
     if c.type != 'move':
         return
 
-    print("Moves: ", p.moves)
-    print("Selection: ", c.selection)
-    print("Type: ", type(c.selection))
-
     selection = int(c.selection)
 
     if p.pp[p.moves[selection]] <= 0:

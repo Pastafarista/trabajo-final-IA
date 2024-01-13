@@ -94,6 +94,10 @@ def do_turn(B:Battle) -> None:
         for i in range(len(B.p1.active_pokemon)):
             if B.p1.active_pokemon[i].fainted:
                 B.p1.request = 'switch'
+                B.pseudo_turn = False
+                B.ended = True
+                B.winner = 'p2'
+                turn_end(B)
             else:
                 B.p1.request = 'pass'
 
@@ -101,8 +105,13 @@ def do_turn(B:Battle) -> None:
         for i in range(len(B.p2.active_pokemon)):
             if B.p2.active_pokemon[i].fainted:
                 B.p2.request = 'switch'
+                B.pseudo_turn = False
+                B.ended = True
+                B.winner = 'p1'
+                turn_end(B)
             else:
                 B.p2.request = 'pass'
+
     
     if B.debug:
         print('---End of Turn ' + str(B.turn) + '---')

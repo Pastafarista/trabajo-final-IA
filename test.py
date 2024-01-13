@@ -26,9 +26,9 @@ def test(path_to_model):
 
     env = Environment(pokemon1, pokemon2)
 
-    for episode in range(TEST_EPISODES):
-    
-        while True:
+    episode = 0
+
+    while True:
             state = agent.get_state(env)
         
             # get action
@@ -41,7 +41,7 @@ def test(path_to_model):
 
             action_p2 = random.randint(0,3)
 
-            done, __, winner = env.step(action_p1, action_p2)
+            done, reward, winner = env.step(action_p1, action_p2)
 
             if done:
                 env = Environment(pokemon1, pokemon2)
@@ -50,9 +50,12 @@ def test(path_to_model):
 
                 if winner == 0:
                     wins += 1
-                else:
+                elif winner == 1:
                     losses += 1
+            
+                episode += 1
 
+            if episode >= TEST_EPISODES:
                 break
                 
     return wins, losses            

@@ -73,10 +73,6 @@ class Environment():
         self.battle =  sim.Battle('single', 'equipo_1', teams[team_p1], 'equipo_2', teams[team_p2], debug = True)
 
     def step(self, action_p1:int, action_p2:int):
-
-        if(self.battle.ended):
-            return 0, True
-
         # los jugadores eligen los movimientos
         sim.decide(self.battle.p1, action_p1)
         sim.decide(self.battle.p2, action_p2)

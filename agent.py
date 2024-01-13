@@ -10,6 +10,7 @@ from collections import deque
 from environment import Environment
 from model import Linear_QNet, QTrainer
 import sys
+from matplotlib import pyplot as plt
 
 PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, PATH + "/pokemon_game")
@@ -139,7 +140,13 @@ Funcion con la que entrenamos el modelo de RL
 def train(pokemon1:str, pokemon2:str) -> None:
     agent = Agent()
     env = Environment(pokemon1, pokemon2)
+    
+    p1_wins_graph = np.zeros(1000)
+    p2_wins_graph = np.zeros(1000)
 
+    p1_wins = 0
+    p2_wins = 0
+    
     while True:
         # obtener estado antiguo
         state_old = agent.get_state(env)
@@ -153,7 +160,7 @@ def train(pokemon1:str, pokemon2:str) -> None:
 
         # traducir el movimiento [0, 0, 0, 1] -> 3
 
-        reward, done, __  = env.step(np.argmax(final_move), enemy_action)
+        reward, done, winner  = env.step(np.argmax(final_move), enemy_action)
         state_new = agent.get_state(env)
         
         '''
@@ -174,13 +181,22 @@ def train(pokemon1:str, pokemon2:str) -> None:
             env = Environment(pokemon1, pokemon2)
             agent.numero_partidas += 1
             agent.train_long_memory()
-            
-            # mostrar resultados
-            print('Partida', agent.numero_partidas)
+
+            if winner == 0:
+                p1_wins += 1
+                p1_wins_graph[agent.numero_partidas - 1] = p1_wins
+            elif winner == 1:
+                p2_wins += 1
+                p2_wins_graph[agent.numero_partidas - 1] = p2_wins       
 
         if agent.numero_partidas == 1000:
             agent.model.save(file_name=f"{pokemon1}-vs-{pokemon2}.pth")
             break 
+
+    plt.plot(p1_wins_graph, label=f"{pokemon1}") 
+    plt.plot(p2_wins_graph, label=f"{pokemon2}")
+    plt.legend()
+    plt.savefig(f"model/{pokemon1}-vs-{pokemon2}.png")
 
 if __name__ == '__main__':
     train("raichu", "keldeo")

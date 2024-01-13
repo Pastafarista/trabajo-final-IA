@@ -7,6 +7,7 @@ import json
 import numpy as np
 from collections import deque
 from environment import Environment
+from model import Linear_QNet, QTrainer
 
 MAX_MEMORY = 100_000
 BATCH_SIZE = 1000
@@ -50,14 +51,13 @@ class Agent:
         self.gamma = 0.9 # discount rate
         self.memory = deque(maxlen=MAX_MEMORY) # cola de memoria doble (se puede añadir y quitar por ambos lados)
         self.pokemons, self.moves = Agent.map_data() # diccionarios con los pokemons y los movimientos
-
-        #TODO: Model
-        #TODO: Trainer
+        self.model = Linear_QNet(12, 256, 4) # 12 -> tamaño del estado, 256 -> tamaño de la capa oculta, 4 -> numero de movimientos
+        self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
 
     '''
     Funcion que optiene el estado del juego en el que se encuentra el agente:
         [nom_poke_p1, hp_poke_p1, move_1_poke_p1, move_2_poke_p1, move_3_poke_p1, move_4_poke_p1, 
-        nom_poke_p2, hp_poke_p2, move_1_poke_p2, move_2_poke_p2, move_3_poke_p2, move_4_poke_p2, ended, winner]
+        nom_poke_p2, hp_poke_p2, move_1_poke_p2, move_2_poke_p2, move_3_poke_p2, move_4_poke_p2]
     '''
     def get_state(self, env):
 
@@ -65,12 +65,14 @@ class Agent:
         
         state = []
         for player in [game.p1, game.p2]:
-            for pokemon in player.pokemon:
-                state.append(self.pokemons[pokemon.species])
-                state.append(pokemon.hp)
+            
+            pokemon = player.active_pokemon[0]
+
+            state.append(self.pokemons[pokemon.species])
+            state.append(pokemon.hp)
                 
-                for move in pokemon.moves:
-                    state.append(self.moves[move])
+            for move in pokemon.moves:
+                state.append(self.moves[move])
 
         return np.array(state, dtype = np.int16)
 
@@ -148,7 +150,7 @@ def train():
         reward, done  = env.step(final_move, enemy_action)
         state_new = agent.get_state(env)
 
-        print(f"Estado inicial: {state_old}")
+        print(f"Estado inicial: {state_old} len: {len(state_old)}")
         print(f"Movimiento elegido: {final_move}")
         print(f"Recompensa: {reward}")
         print(f"Estado nuevo: {state_new}")

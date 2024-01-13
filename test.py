@@ -63,11 +63,10 @@ def test(path_to_model):
 
 
 if __name__ == '__main__':
-    wins, losses = test('model/raichu-vs-keldeo.pth')
+    wins, losses = test('model/stakataka-vs-keldeo.pth')
 
     print(f'wins: {wins}, losses: {losses}')
     print(f'win rate: {wins/(wins+losses)}')
-        
 
 
 

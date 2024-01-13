@@ -87,8 +87,7 @@ class Environment():
         hp_p2_new = self.battle.p2.active_pokemon[0].hp
 
         # calculamos la recompensa
-        reward_p1 = (hp_p2 - hp_p2_new) / self.battle.p1.active_pokemon[0].maxhp * 10 - (hp_p1 - hp_p1_new) / self.battle.p1.active_pokemon[0].maxhp * 10
-        # reward_p2 = (hp_p2 - hp_p2_new) / self.battle.p2.active_pokemon[0].maxhp * 10 - (hp_p1_new - hp_p1) / self.battle.p2.active_pokemon[0].maxhp * 10
+        reward_p1 = (hp_p2 - hp_p2_new) / self.battle.p1.active_pokemon[0].maxhp * 10 - (hp_p1 - hp_p1_new) / self.battle.p1.active_pokemon[0].maxhp * 10 # máximo de 10pts
 
         # calculamos si el juego ha terminado
         done = self.battle.ended
@@ -97,11 +96,11 @@ class Environment():
 
         if done:
             if self.battle.winner == 'p1':
-                reward_p1 += 10
+                reward_p1 += 20
                 winner = 0
                 # reward_p2 += -10
             else:
-                reward_p1 += -10
+                reward_p1 += -20
                 winner = 1
                 # reward_p2 += 10
 

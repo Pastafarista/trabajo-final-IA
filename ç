@@ -19,6 +19,9 @@ MAX_MEMORY = 100_000
 BATCH_SIZE = 1000
 LR = 0.001
 
+# hacer que pytorch funcione con la GPU
+torch.cuda.set_device(0) 
+
 class Agent:
 
     # devuelve dos diccionarios en los que la clave es el nombre del pokemon/movimiento y el valor es un id
@@ -141,13 +144,11 @@ def train(pokemon1:str, pokemon2:str) -> None:
     agent = Agent()
     env = Environment(pokemon1, pokemon2)
     
-    # variables para el grafico
-    p1_wins_graph = []
-    p2_wins_graph = []
-    last_victories_p1 = 0
-    last_victories_p2 = 0
+    p1_wins_graph = np.zeros(1000)
+    p2_wins_graph = np.zeros(1000)
 
-    record_win = 0
+    p1_wins = 0
+    p2_wins = 0
     
     while True:
         # obtener estado antiguo
@@ -165,7 +166,12 @@ def train(pokemon1:str, pokemon2:str) -> None:
         reward, done, winner  = env.step(np.argmax(final_move), enemy_action)
         state_new = agent.get_state(env)
         
-        print(f"Partida: {agent.numero_partidas} - Recompensa: {reward}")
+        '''
+        print(f"Estado inicial: {state_old} len: {len(state_old)}")
+        print(f"Movimiento elegido: {final_move}")
+        print(f"Recompensa: {reward}")
+        print(f"Estado nuevo: {state_new}")
+        '''
         
         # entrenar al agente con el nuevo estado (short memory)
         agent.train_short_memory(state_old, final_move, reward, state_new, done)
@@ -180,30 +186,18 @@ def train(pokemon1:str, pokemon2:str) -> None:
             agent.train_long_memory()
 
             if winner == 0:
-                last_victories_p1 += 1
+                p1_wins += 1
+                p1_wins_graph[agent.numero_partidas - 1] = p1_wins
             elif winner == 1:
-                last_victories_p2 += 1
+                p2_wins += 1
+                p2_wins_graph[agent.numero_partidas - 1] = p2_wins       
 
-            if(agent.numero_partidas % 100 == 0):
-                p1_wins_graph.append(last_victories_p1 / 100)
-                p2_wins_graph.append(last_victories_p2 / 100)
-
-                if record_win < p1_wins_graph[-1]:
-                    record_win = p1_wins_graph[-1]
-                    agent.model.save(file_name=f"{pokemon1}-vs-{pokemon2}.pth")
-
-                last_victories_p1 = 0
-                last_victories_p2 = 0
-
-        if agent.numero_partidas == 10000:
+        if agent.numero_partidas == 1000:
+            agent.model.save(file_name=f"{pokemon1}-vs-{pokemon2}.pth")
             break 
 
-    time = np.arange(1, agent.numero_partidas/100 + 1)
-    plt.plot(time, p1_wins_graph, label=f"{pokemon1}") 
-    plt.plot(time, p2_wins_graph, label=f"{pokemon2}")
-    plt.xlabel("Partidas")
-    plt.ylabel("Porcentaje de victorias")
-    plt.title(f"Porcentaje de victorias de {pokemon1} y {pokemon2}")
+    plt.plot(p1_wins_graph, label=f"{pokemon1}") 
+    plt.plot(p2_wins_graph, label=f"{pokemon2}")
     plt.legend()
     plt.savefig(f"model/{pokemon1}-vs-{pokemon2}.png")
 

@@ -4,6 +4,9 @@ import torch.optim as optim
 import torch.nn.functional as F
 import os
 
+# hacer que pytorch funcione con la GPU
+torch.cuda.set_device(0) 
+
 class Linear_QNet(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
         super().__init__()
@@ -35,7 +38,7 @@ class QTrainer:
         next_state = torch.tensor(next_state, dtype=torch.float)
         action = torch.tensor(action, dtype=torch.long)
         reward = torch.tensor(reward, dtype=torch.float)
-        
+       
         if len(state.shape) == 1:
             # state = torch.unsqueeze(state, 0)
             state = state.unsqueeze(0)

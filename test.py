@@ -6,7 +6,6 @@ from model import Linear_QNet, QTrainer
 import numpy as np
 
 def test(path_to_model):
-
     wins = 0
     losses = 0
 
@@ -41,7 +40,9 @@ def test(path_to_model):
 
             action_p2 = random.randint(0,3)
 
-            done, reward, winner = env.step(action_p1, action_p2)
+            reward, done, winner = env.step(action_p1, action_p2)
+
+            print(f'episode: {episode}, done: {done}, reward: {reward}, winner: {winner}')
 
             if done:
                 env = Environment(pokemon1, pokemon2)

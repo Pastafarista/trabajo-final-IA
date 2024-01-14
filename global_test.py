@@ -74,7 +74,7 @@ def test(path_to_model, player:int=0, episodes:int=1000):
 
 
 if __name__ == '__main__':
-    p1_wins, p1_losses = test('model/global_model_p1.pth', player=1, episodes=100000) # P1: random bot 1, P2: model
+    p1_wins, p1_losses = test('model/global_model_p1.pth', player=1, episodes=6) # P1: random bot 1, P2: model
     p2_wins, p2_losses = p1_losses, p1_wins
     
     print(f'P1 wins: {p1_wins}, P1 losses: {p1_losses} winrate: {p1_wins/(p1_wins+p1_losses)}')

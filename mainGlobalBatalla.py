@@ -43,12 +43,13 @@ def selectMove(pokemon):
 
 def selectNewPokemon(pokemons):
     i = 1
-    for name in pokemons:
-        print(str(i)+") "+name)
+    for j in range(10):
+        print(str(i)+") "+pokemons[j]+"\t"+str(i+10)+") "+pokemons[j+10]+"\t"+str(i+20)+") "+pokemons[j+20])
         i += 1
 
     while True:
-        seleccion = int(input('Elige el pokemon que quieres utilizar:\n'))
+        seleccion = input('Elige el pokemon que quieres utilizar:\n')
+        seleccion = int(seleccion)
         if(seleccion > 1 or seleccion < i):
             print("Pokemon elegido: " + pokemons[seleccion-1])
             return(pokemons[seleccion - 1])
@@ -64,17 +65,14 @@ def batalla(path_to_model):
     pokemon1 = random.choice(pokemons)
     pokemon2 = selectNewPokemon(pokemons)
     print("Combate iniciado>\nIA:\t"+pokemon1+"|Tú:\t"+pokemon2)
-
+    time.sleep(2)
     # load model
     model = Linear_QNet(12, 256, 4) 
     model.load_state_dict(torch.load(path_to_model))
 
     env = Environment(pokemon1, pokemon2)
-
     print("============\nA luchar!!!\n============")
-    
     episode = 0
-    
 
     while True:
         # Combat logic
@@ -97,12 +95,17 @@ def batalla(path_to_model):
             if winner == 1: #Gana el jugador
                 print(f'winner: {pokemon2}')
 
-            time.sleep(5)
+            time.sleep(3)
 
             pokemon1 = random.choice(pokemons)
             pokemon2 = selectNewPokemon(pokemons)
+
+            print("Combate iniciado>\nIA:\t"+pokemon1+"|Tú:\t"+pokemon2)
             env = Environment(pokemon1, pokemon2)
+            
+            time.sleep(2)
             print("============\nA luchar!!!\n============")
+
         if episode > 1:
             break
     return winner 

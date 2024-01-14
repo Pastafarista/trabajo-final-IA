@@ -56,8 +56,23 @@ def selectNewPokemon(pokemons):
         else:
             print("Pokemon no válido, elige de nuevo")
     
+def endGame():
+    while True:
+        seleccion = input('Desea finalizar el combate?:\n[1]>Si \t[2]>No\n')
+        seleccion = int(seleccion)
+        if(seleccion == 1):
+            return True
+        elif(seleccion == 2):
+            return False
+        else:
+            print("Opción no valida")
+
 
 def batalla(path_to_model):
+
+    wins = 0
+    losses = 0 
+    finish = False
 
     agent = Agent()
     pokemons = list(agent.pokemons.keys())
@@ -92,21 +107,29 @@ def batalla(path_to_model):
         if done:
             if winner == 0:  #Gana la IA
                 print(f'winner: {pokemon1}')
+                wins+=1
             if winner == 1: #Gana el jugador
                 print(f'winner: {pokemon2}')
+                losses+=1
+
+            print(f'IA wins: {wins}, IA losses: {losses} winrate: {wins/(wins+losses)}')
 
             time.sleep(3)
+
+            #Preguntamos por si se quiere parar de combatir
+            if endGame():
+                break
 
             pokemon1 = random.choice(pokemons)
             pokemon2 = selectNewPokemon(pokemons)
 
             print("Combate iniciado>\nIA:\t"+pokemon1+"|Tú:\t"+pokemon2)
             env = Environment(pokemon1, pokemon2)
-            
+
             time.sleep(2)
             print("============\nA luchar!!!\n============")
 
-        if episode > 1:
+        if finish:
             break
     return winner 
 

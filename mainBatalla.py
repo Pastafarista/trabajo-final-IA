@@ -6,8 +6,7 @@ import numpy as np
 import random, json
 import os
 
-PATH = os.path.dirname(os.path.abspath(__file__))
-POKEMON_DIR = os.path.join(BASE_DIR, 'data/pokemons/')
+POKEMON_DIR = 'data/pokemons/'
 
 def showAction(pokemon):
     pokemon_actual = {}
@@ -25,8 +24,23 @@ def showAction(pokemon):
         pokemon_actual['evs'] = evs
         pokemon_actual['nature'] = nature
 
+        i = 1
+        print("Movimientos de: "+ pokemon)
         for move in pokemon_actual['moves']:
-             print(move)
+            print(str(i)+") "+move)
+            i += 1
+
+def selectMove(pokemon):
+    
+    while True:
+        showAction(pokemon)
+        seleccion = input('¿Qué movimiento deseas realizar?\n')
+        seleccion = int(seleccion)
+        if(seleccion > 1 or seleccion < 4):
+            print("Movimiento: " + str(seleccion))
+            return(seleccion - 1)
+        else:
+            print("Movimiento no válido, elige de nuevo")
 
 def batalla(path_to_model):
 
@@ -36,18 +50,23 @@ def batalla(path_to_model):
     pokemon1 = pokemons[0]
     pokemon2 = pokemons[1].split('.')[0]
 
+    print("Combate iniciado>\nIA:\t"+pokemon1+"\Tú:\t"+pokemon2)
+
     # load model
     model = Linear_QNet(12, 256, 4) 
     model.load_state_dict(torch.load(path_to_model))
 
     agent = Agent()
     env = Environment(pokemon1, pokemon2)
+
+    print("A luchar!!!")
     
     episode = 0
+    
 
     while True:
         # Combat logic
-
+        selectedAction = False
         state = agent.get_state(env)
 
         #get action
@@ -57,24 +76,18 @@ def batalla(path_to_model):
         move = torch.argmax(prediction).item()
         final_move[move] = 1
         action_p1 = np.argmax(final_move)
+        action_p2 = selectMove(pokemon2)
 
-        showAction(pokemon2)
-
-        action_p2 = 1
 
         reward, done, winner = env.step(action_p1, action_p2)
-        print(f'Done: {done}, reward: {reward}, winner: {winner}')
         if done:
-            env = Environment(pokemon1, pokemon2)
-        
-            print(f'episode: {episode}, winner: {winner}')
-                
-            episode += 1
-        if episode >= 1:
-                break
+            if winner == 0:
+                print(f'winner: {pokemon1}')
+            if winner == 1:
+                print(f'winner: {pokemon2}')
+            break
     return winner 
 
 if __name__ == '__main__':
-    showAction('raichu')
     winner= batalla('model/raichu-vs-keldeo.pth')
     

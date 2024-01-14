@@ -209,4 +209,4 @@ def train(epochs:int) -> None:
     print(f"Tiempo de entrenamiento: {end_time - start_time}")
 
 if __name__ == '__main__':
-    train(1000)
+    train(10000)

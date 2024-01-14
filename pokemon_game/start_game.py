@@ -19,3 +19,4 @@ battle2 = sim.Battle('single', 'prueba', teams[0],'prueba2', teams[1], debug = T
 sim.run(battle1)
 print("=============================")
 sim.run(battle2)
+

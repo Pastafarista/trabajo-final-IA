@@ -164,6 +164,11 @@ def train(epochs:int) -> None:
 
     env = Environment(pokemon1, pokemon2)
     start_time = datetime.datetime.now()
+
+    # graficos
+    rewards_p1 = []
+    rewards_p2 = []
+    wins_pokemons = {pokemon: 0 for pokemon in pokemons}
     
     while True:
         # obtener estado antiguo
@@ -183,11 +188,21 @@ def train(epochs:int) -> None:
 
         # guardar en la memoria del agente el estado, la accion, la recompensa, el siguiente estado y si el juego ha terminado
         agent.remember(state_old, final_moves, rewards, state_new, done)
+
+        # grafico de las recompensas
+        rewards_p1.append(rewards[0])
+        rewards_p2.append(rewards[1])
  
         if done:
             # entrenar al agente con todos los estados (long memory), resetear el juego y actualizar el record
             agent.numero_partidas += 1
             agent.train_long_memory()
+
+            # actualizar las victorias de los pokemons
+            if winner == "p1":
+                wins_pokemons[pokemon1] += 1
+            else:
+                wins_pokemons[pokemon2] += 1
 
             # cambiar los pokemons 100 partidas
             if(agent.numero_partidas % 100 == 0):
@@ -202,11 +217,25 @@ def train(epochs:int) -> None:
             agent.model_p2.save(file_name="global_model_p2.pth")
             break 
 
-    # grafico
     time = np.arange(1, agent.numero_partidas/100 + 1)
     end_time = datetime.datetime.now()
+
+    # grafico de las recompensas
+    game_time = np.arange(1, len(rewards_p1) + 1)
+    plt.plot(game_time, rewards_p1, label="Recompensas P1")
+    plt.plot(game_time, rewards_p2, label="Recompensas P2")
+    plt.xlabel("Partidas")
+    plt.ylabel("Recompensas")
+    plt.legend()
+    plt.savefig("global_rewards.png")
     
     print(f"Tiempo de entrenamiento: {end_time - start_time}")
+
+    # grafico de las victorias de los pokemons
+    plt.bar(wins_pokemons.keys(), wins_pokemons.values())
+    plt.xlabel("Pokemons")
+    plt.ylabel("Victorias")
+    plt.savefig("global_wins.png")
 
 if __name__ == '__main__':
     train(10000)

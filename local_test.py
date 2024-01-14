@@ -1,8 +1,8 @@
 import torch
 from environment import Environment
-from agent import Agent
+from local_agent import Agent
 import random
-from model import Linear_QNet, QTrainer
+from model import Linear_QNet 
 import numpy as np
 
 def test(path_to_model, player:int=0, episodes:int=1000):

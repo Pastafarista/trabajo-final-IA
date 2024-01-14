@@ -151,20 +151,18 @@ class Agent:
         return player_moves
 
 '''
-Funcion con la que entrenamos el modelo de RL
-'''
-def train(pokemon1:str, pokemon2:str, epochs:int) -> None:
-    agent = Agent()
-    env = Environment(pokemon1, pokemon2)
-    
-    # variables para el grafico
-    p1_wins_graph = []
-    p2_wins_graph = []
-    last_victories_p1 = 0
-    last_victories_p2 = 0
+Funcion con la que entrenamos el modelo de RL. En el agente global funciona cambiando al pokemon oponente cada 100 partidas, así el agente aprenderá a luchar contra cualquier pokémon.
+''' 
 
-    record_win_p1 = 0
-    record_win_p2 = 0
+def train(epochs:int) -> None:
+    agent = Agent()
+
+    pokemons = list(agent.pokemons.keys())
+
+    pokemon1 = random.choice(pokemons)
+    pokemon2 = random.choice(pokemons)
+
+    env = Environment(pokemon1, pokemon2)
     start_time = datetime.datetime.now()
     
     while True:
@@ -188,49 +186,27 @@ def train(pokemon1:str, pokemon2:str, epochs:int) -> None:
  
         if done:
             # entrenar al agente con todos los estados (long memory), resetear el juego y actualizar el record
-            env = Environment(pokemon1, pokemon2)
             agent.numero_partidas += 1
             agent.train_long_memory()
 
-            if winner == 0:
-                last_victories_p1 += 1
-            elif winner == 1:
-                last_victories_p2 += 1
-
+            # cambiar los pokemons 100 partidas
             if(agent.numero_partidas % 100 == 0):
-                p1_wins_graph.append(last_victories_p1 / 100)
-                p2_wins_graph.append(last_victories_p2 / 100)
-
-                if record_win_p1 < p1_wins_graph[-1]:
-                    record_win_p1 = p1_wins_graph[-1]
-                    agent.model_p1.save(file_name=f"[{pokemon1}]-vs-{pokemon2}.pth")
-
-                if record_win_p2 < p2_wins_graph[-1]:
-                    record_win_p2 = p2_wins_graph[-1]
-                    agent.model_p2.save(file_name=f"{pokemon2}-vs-[{pokemon1}].pth")
-
-                last_victories_p1 = 0
-                last_victories_p2 = 0
+                pokemon1 = random.choice(pokemons)
+                pokemon2 = random.choice(pokemons)
+           
+            # resetear el juego
+            env = Environment(pokemon1, pokemon2)
 
         if agent.numero_partidas == epochs:
+            agent.model_p1.save(file_name="global_model_p1.pth")
+            agent.model_p2.save(file_name="global_model_p2.pth")
             break 
 
     # grafico
     time = np.arange(1, agent.numero_partidas/100 + 1)
-    plt.plot(time, p1_wins_graph, label=f"{pokemon1}") 
-    plt.plot(time, p2_wins_graph, label=f"{pokemon2}")
-    plt.xlabel("Partidas")
-    plt.ylabel("Porcentaje de victorias")
-    plt.title(f"Porcentaje de victorias de {pokemon1} y {pokemon2}")
-    plt.legend()
-    plt.savefig(f"model/{pokemon1}-vs-{pokemon2}.png")
-
-    # mostrar tiempo de entrenamiento y mejor modelo
     end_time = datetime.datetime.now()
     
     print(f"Tiempo de entrenamiento: {end_time - start_time}")
-    print(f"Mejor modelo de {pokemon1}: {record_win_p1}")
-    print(f"Mejor modelo de {pokemon2}: {record_win_p2}")
 
 if __name__ == '__main__':
-    train("garchomp", "gyarados", 1000)
+    train(1000)

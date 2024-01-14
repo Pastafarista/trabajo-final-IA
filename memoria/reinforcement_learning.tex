@@ -1,15 +1,71 @@
+\usepackage{amsmath}
 \chapter{Reinforcement Learning}
 
 A continuación, se va a explicar brevemente en qué consiste el Reinforcement Learning (a partir de ahora RL), además de explicar cómo se aplicará este area del aprendizaje automático a nuestro trabajo.
 
-\section{RL}
-
 El RL es un paradigma de aprendizaje automático que se centra en enseñar a un agente a tomar decisiones secuenciales para maximizar una recompensa acumulativa a lo largo del tiempo. En este enfoque de aprendizaje automático, el agente interactúa con un entorno dinámico y aprende a base de las recompensas y penalizaciones que conllevan sus decisiones.
 
-\section{RL en Pokémon}
+\section{Reinforcement Learning aplicado a Pokémon}
 
 Como en este trabajo estamos llevando a cabo batallas pokemon, el agente tiene un rango de 4 opciones a la hora de realizar una accion. Estas opciones son los 4 movimientos que puede efectuar el pokemon que está en ese momento luchando. La forma en la que se entregarán recompensas y penalizaciones al agente será en base de si estos movimientos inflingen daño (quitan puntos de vida del pokemon al que se enfrenta), o si gana el combate. De esta forma el agente aprenderá qué movimientos son los óptimos para los distintos pokemons.
 
 El agente también posee un estado, en relación con el entorno de este trabajo. Este estado incluirá valores como, por ejemplo, el tipo o tipos de Pokémon que el agente maneja y el Pokémon al que se enfrenta, las puntuaciones de vida de los Pokémon y los movimientos disponibles de los Pokémon.
 
 Para elegir la accion que realizará el Pokémon, el modelo que se creará tendrá que recibir como inputs, todos los valores del estado comentados previamente y devolvera un output de 4 valores correspondientes a los 4 posibles movimientos del Pokémon controlado por el agente, de los cuales se elegirá el que tenga un mayor valor.
+
+\section{Deep Q-Learning}
+
+Este trabajo tambien va a estar centrado en Deep Q-Learning, un enfoque en el campo del deep learning aplicado a la toma de decisiones en entornos dinámicos como el que estamos usando. Q-Learning es un algoritmo que buscan aprender una función Q con la que evaluar la calidad de las acciones en un estado dado.
+
+Para esto vamos a tener que implementar una red neuronal profunda para evitar utilizar tablas con todas las posibles combinaciones de acciones y estados, que en este caso serían tablas de proporciones demasiado grandes teniendo en cuenta todos los movimientos, pokemons y tipos que se han comentado anteriormente. 
+
+La función Q es una función que asigna un valor para cada par estado-acción y se denota como Q(s,a), donde s respresenta el estado y a la acción. Esta función representa el valor esperado de tomar una acción en un estado especfíco, es decir, mide cuánto valor acumulativo (de recompensas) se espera obtener de realizar dicha acción es ese estado, y de esta forma saber cuál es la estrategia que seguir de ahí en adelante.
+
+El Q-Learning presenta un algoritmo para entrenar al agente en el entorno propuesto, y sigue los siguientes pasos:
+
+1. Inicialización
+
+	- Inicializa la función Q(s,a) de forma arbitraria para todos los pares estado-	acción.\newline
+	- Establece los parámetros del algoritmo: tasa de aprendizaje, factor de descuento y 	otros que se explicarán más adelante.\newline
+
+
+2. Exploración/ Explotación (Realizar acciones)
+
+	- En cada frame o etapa del proceso, se elige una acción a realizar en el estado 	actual. Esta decisión puede ser determinista o estocástica, la primera se basa en 	elegir la acción que tiene el mayor valor Q conocido (explotacion), mientras que la 	segunda busca realizar acciones nuievas para descubrir como de efectivas o útiles son 	(exploración).
+
+
+3. Interaccion con el entorno
+
+	- Una vez la acción ha sido realizada, se observa la recompensa o penalización 	recibida y el próximo estado.
+
+
+4. Actualización de la función Q
+
+	- Se usa la ecuación de Bellman para actualizar Q(s,a):
+		
+		\begin{equation}
+		Q(s, a) \leftarrow Q(s, a) + \alpha \cdot \left[ r + \gamma \cdot \max_{a'} 		Q(s', a') - Q(s, a) \right]
+		\end{equation}
+
+		Donde:\newline
+			- (alpha) es la tasa de aprendizaje que controla la magnitud de la actualización.\newline			- r es la recompensa obtenida
+			- gamma como el factor de descuento que penaliza las recompensas a largo plazo.\newline
+			- max_a'Q(s',a') representa el valor máximo esperado en el proximo estado s'\newline
+
+
+5. Repetición
+
+	- Se realizan los pasos del 2 al 4 durante un número de frames o iteraciones.
+
+
+6. Convergencia
+	
+	- La función Q converge a la función de valor óptimo a medida que el agente explora 	y aprende mas sobre el entorno.
+
+
+7. Política óptima
+
+	- La política óptima se obtiene a partir de la función Q resultante, la acción 	óptima es aquella que maximiza Q(s,a).
+
+
+Este algoritmo es un proceso iterativo en el que el agente interactúa con el entorno y cambia sus estimaciones de Q, de esta forma creando una política o estrategia para maximizar las recompensas. Un equilibrio entre la exploración y la explotación es de gran importancia para asegurar que el agente conoce las mejores acciones a realizar sin atascarse en comportamientos subóptimos.

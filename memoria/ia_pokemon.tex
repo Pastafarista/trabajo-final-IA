@@ -1,0 +1,13 @@
+\chapter{IA Pokemon}
+
+Habiendo establecido el funcionamiento del RL y del Deep Q-Learning, se explicará como se aplican al entrenamiento de una IA capaz de realizar batallas pokemon.
+
+\section{Entorno}
+
+El entorno del que se ha hablado anteriormente tiene un rol de suma importancia pues al programar este en la clase "environment.py", se le ha añadido la función "step()". Esta funcion es la encargada de dirigir las batallas pokemon pues elige el movimiento del pokemon, ejecuta el turno y calcula las recompensas a impartir en los agentes, que son los dos contrincantes. Una vez se han calculado las recompensas respectivas al turno recién realizado, se ha de comprobar si el combate se ha terminado, es decir, si uno de los pokemons ha sido derrotado, en caso positivo se reparten las recompensas acordes a ganar el combate y finalmente se devuelven las recompesnsas de ambos jugadores, si el combate ha terminado, y el ganador de en caso de haberlo hecho.
+
+\section{Agente}
+
+El agente es la clase que comunica el entorno con el modelo de dos formas: con memoria corta, encargada del entrenamiento entre turno, y la memoria larga, la encargada del entrenamiento en base a todos los datos que se han ido recopilando a lo largo del entrenamiento. Para esto se usa una estructura de datos "deque" o "double ended queue", en español, cola doblemente terminada. En este trabajo, este tipo de cola resulta mas eficiente ya que permite realizar cambios a ambos lados de la cola mientras que las colas convencionales solo son manipulables por un extremo, y en este trabajo estamos constantemente accediendo a datos de ambos lados de la cola, uno cuando borramos elementos de la cola y otro para añadir nuevos. Con deque es posible hacer esto con una complejidad temporal de solo O(1) mientras que con una cola normal sería de O(n).
+
+En esta clase tambien tenemos una funcion vital para el funcionamiento de esta inteligencia artifial, get_state(env). Esta funcion traduce el estado del juego actual a numeros naturales para mandarselo a la red neuronal y que esta interprete la información.

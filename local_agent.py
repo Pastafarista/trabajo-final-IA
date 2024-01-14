@@ -233,4 +233,7 @@ def train(pokemon1:str, pokemon2:str, epochs:int) -> None:
     print(f"Mejor modelo de {pokemon2}: {record_win_p2}")
 
 if __name__ == '__main__':
-    train("garchomp", "gyarados", 1000)
+    train("raichu", "clawitzer", 1000)
+    
+
+

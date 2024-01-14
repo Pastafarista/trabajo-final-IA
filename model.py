@@ -4,9 +4,6 @@ import torch.optim as optim
 import torch.nn.functional as F
 import os
 
-# hacer que pytorch funcione con la GPU
-torch.cuda.set_device(0) 
-
 class Linear_QNet(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
         super().__init__()

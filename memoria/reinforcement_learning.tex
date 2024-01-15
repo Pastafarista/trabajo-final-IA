@@ -22,50 +22,52 @@ Para esto vamos a tener que implementar una red neuronal profunda para evitar ut
 La función Q es una función que asigna un valor para cada par estado-acción y se denota como Q(s,a), donde s respresenta el estado y a la acción. Esta función representa el valor esperado de tomar una acción en un estado especfíco, es decir, mide cuánto valor acumulativo (de recompensas) se espera obtener de realizar dicha acción es ese estado, y de esta forma saber cuál es la estrategia que seguir de ahí en adelante.
 
 El Q-Learning presenta un algoritmo para entrenar al agente en el entorno propuesto, y sigue los siguientes pasos:
+\begin{enumerate}
+	\item Inicialización
+		\begin{itemize}
+			\item Inicializa la función Q(s,a) de forma arbitraria para todos los pares estado-	acción.\newline
+			\item Establece los parámetros del algoritmo: tasa de aprendizaje, factor de descuento y 	otros que se explicarán más adelante.\newline
+		\end{itemize}
 
-1. Inicialización
+	\item Exploración/ Explotación (Realizar acciones)
+		\begin{itemize}
+			\item En cada frame o etapa del proceso, se elige una acción a realizar en el estado 	actual. Esta decisión puede ser determinista o estocástica, la primera se basa en 	elegir la acción que tiene el mayor valor Q conocido (explotacion), mientras que la 	segunda busca realizar acciones nuievas para descubrir como de efectivas o útiles son 	(exploración).
+		\end{itemize}
 
-	- Inicializa la función Q(s,a) de forma arbitraria para todos los pares estado-	acción.\newline
-	- Establece los parámetros del algoritmo: tasa de aprendizaje, factor de descuento y 	otros que se explicarán más adelante.\newline
+	\item Interaccion con el entorno
+		\begin{itemize}
+			\item Una vez la acción ha sido realizada, se observa la recompensa o penalización 	recibida y el próximo estado.
+	    \end{itemize}
 
-
-2. Exploración/ Explotación (Realizar acciones)
-
-	- En cada frame o etapa del proceso, se elige una acción a realizar en el estado 	actual. Esta decisión puede ser determinista o estocástica, la primera se basa en 	elegir la acción que tiene el mayor valor Q conocido (explotacion), mientras que la 	segunda busca realizar acciones nuievas para descubrir como de efectivas o útiles son 	(exploración).
-
-
-3. Interaccion con el entorno
-
-	- Una vez la acción ha sido realizada, se observa la recompensa o penalización 	recibida y el próximo estado.
-
-
-4. Actualización de la función Q
-
-	- Se usa la ecuación de Bellman para actualizar Q(s,a):
-		
+	\item Actualización de la función Q
+		\begin{itemize}
+			\item Se usa la ecuación de Bellman para actualizar Q(s,a):
+		\end{itemize}
 		\begin{equation}
 		Q(s, a) \leftarrow Q(s, a) + \alpha \cdot \left[ r + \gamma \cdot \max_{a'} 		Q(s', a') - Q(s, a) \right]
 		\end{equation}
 
-		Donde:\newline
-			- (alpha) es la tasa de aprendizaje que controla la magnitud de la actualización.\newline			- r es la recompensa obtenida
-			- gamma como el factor de descuento que penaliza las recompensas a largo plazo.\newline
-			- max_a'Q(s',a') representa el valor máximo esperado en el proximo estado s'\newline
+		Donde:
+		\begin{itemize}
+			\item(alpha) es la tasa de aprendizaje que controla la magnitud de la actualización.
+			\item r es la recompensa obtenida
+			\item gamma como el factor de descuento que penaliza las recompensas a largo plazo.
+			\item max_a'Q(s',a') representa el valor máximo esperado en el proximo estado s'
+		\end{itemize}
 
+	\item Repetición
+		\begin{itemize}
+			\item Se realizan los pasos del 2 al 4 durante un número de frames o iteraciones.
+		\end{itemize}
 
-5. Repetición
+	\item Convergencia
+		\begin{itemize}
+			\item La función Q converge a la función de valor óptimo a medida que el agente explora 	y aprende mas sobre el entorno.
+		\end{itemize}
 
-	- Se realizan los pasos del 2 al 4 durante un número de frames o iteraciones.
-
-
-6. Convergencia
-	
-	- La función Q converge a la función de valor óptimo a medida que el agente explora 	y aprende mas sobre el entorno.
-
-
-7. Política óptima
-
-	- La política óptima se obtiene a partir de la función Q resultante, la acción 	óptima es aquella que maximiza Q(s,a).
-
-
+	\item Política óptima
+		\begin{itemize}
+			\item La política óptima se obtiene a partir de la función Q resultante, la acción 	óptima es aquella que maximiza Q(s,a).
+		\end{itemize}
+\end{enumerate}
 Este algoritmo es un proceso iterativo en el que el agente interactúa con el entorno y cambia sus estimaciones de Q, de esta forma creando una política o estrategia para maximizar las recompensas. Un equilibrio entre la exploración y la explotación es de gran importancia para asegurar que el agente conoce las mejores acciones a realizar sin atascarse en comportamientos subóptimos.

@@ -1,5 +1,5 @@
 # Authors: Antonio Cabrera, Alejandro Gómez, Alejandro Jiménez, Antonio Perez, Luis Crespo
-# Description: El agente se encargará de comunicar el entorno con el modelo de aprendizaje, también se encargará de entrenar al modelo y de realizar las predicciones.
+# Description: El agente se encargará de comunicar el entorno con el modelo de aprendizaje, también se encargará de entrenar al modelo y de realizar las predicciones. El agente local solo se enfoca en aprender a luchar contra un pokemon en especifico.
 
 import random
 import os
@@ -21,7 +21,6 @@ BATCH_SIZE = 1000
 LR = 0.001
 
 class Agent:
-
     # devuelve dos diccionarios en los que la clave es el nombre del pokemon/movimiento y el valor es un id
     @classmethod
     def map_data(cls):
@@ -100,7 +99,14 @@ class Agent:
     Funcion que entrena al agente cuando a terminado una partida
     '''
     def train_long_memory(self):
-        for trainer, memory in ( (self.trainer_p1, self.memory_p1), (self.trainer_p2, self.memory_p2) ):
+
+        trainers = [self.trainer_p1, self.trainer_p2]
+        memories = [self.memory_p1, self.memory_p2]
+
+        for i in range(2):
+            trainer = trainers[i]
+            memory = memories[i]
+
             # Cogemos una muestra aleatoria de la memoria (una tupla de 5 elementos)
             if len(memory) > BATCH_SIZE:
                 mini_sample = random.sample(memory, BATCH_SIZE)
@@ -109,7 +115,6 @@ class Agent:
 
             # Descomprimimos la muestra en 5 listas
             states, actions, rewards, next_states, dones = zip(*mini_sample)
-
             trainer.train_step(states, actions, rewards, next_states, dones)
 
     '''
@@ -124,7 +129,7 @@ class Agent:
     '''
     def get_action(self, state):
         # Epsilon contra la exploracion/exploitacion del agente, cuantas mas partidas lleve menos exploracion y mas exploitacion
-        self.epsilon = 80 - self.numero_partidas 
+        self.epsilon = 800 - self.numero_partidas 
 
         # Lista con los movimientos de cada jugador
         player_moves = []
@@ -173,10 +178,10 @@ def train(pokemon1:str, pokemon2:str, epochs:int) -> None:
         rewards, done, winner  = env.step(np.argmax(final_moves[0]), np.argmax(final_moves[1]))
         state_new = agent.get_state(env)
         
-        print(f"Partida: {agent.numero_partidas} - Recompensas: {rewards}")
+        print(f"Partida: {agent.numero_partidas} - Recompensas P1: {rewards[0]} - Recompensa P2: {rewards[1]} - Ganador: {winner}")
         
         # entrenar al agente con el nuevo estado (short memory)
-        agent.train_short_memory(state_old, final_moves, rewards, state_new, done)
+        agent.train_short_memory(state=state_old, actions=final_moves, rewards=rewards, next_state=state_new, done=done)
 
         # guardar en la memoria del agente el estado, la accion, la recompensa, el siguiente estado y si el juego ha terminado
         agent.remember(state_old, final_moves, rewards, state_new, done)
@@ -228,4 +233,7 @@ def train(pokemon1:str, pokemon2:str, epochs:int) -> None:
     print(f"Mejor modelo de {pokemon2}: {record_win_p2}")
 
 if __name__ == '__main__':
-    train("raichu", "raichu", 1000)
+    train("raichu", "clawitzer", 1000)
+    
+
+

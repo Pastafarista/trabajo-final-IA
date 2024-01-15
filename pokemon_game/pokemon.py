@@ -85,11 +85,11 @@ def add_status(P:Pokemon, status:str, source:Pokemon=None):
         return False
     if status == 'par' and ('Electric' in P.types):
         return False
-    if (status == 'psn' or status == 'tox') and ('Poison' in P.types or 'Steel' in P.types):
-        if source is not None and source.ability == 'corrosion':
-            pass
-        else:
-            return False
+    # if (status == 'psn' or status == 'tox') and ('Poison' in P.types or 'Steel' in P.types):
+    #    if source is not None and source.ability == 'corrosion':
+    #        pass
+    #    else:
+    #        return False
 
     if status == 'slp':
         P.sleep_n = random.randint(1, 3)

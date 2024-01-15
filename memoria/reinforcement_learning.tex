@@ -1,3 +1,4 @@
+\usepackage{amsmath}
 \chapter{Reinforcement Learning}
 
 A continuación, se va a explicar brevemente en qué consiste el Reinforcement Learning (a partir de ahora RL), además de explicar cómo se aplicará este area del aprendizaje automático a nuestro trabajo.
@@ -63,3 +64,10 @@ El Q-Learning presenta un algoritmo para entrenar al agente en el entorno propue
 		\begin{itemize}
 			\item La función Q converge a la función de valor óptimo a medida que el agente explora 	y aprende mas sobre el entorno.
 		\end{itemize}
+
+	\item Política óptima
+		\begin{itemize}
+			\item La política óptima se obtiene a partir de la función Q resultante, la acción 	óptima es aquella que maximiza Q(s,a).
+		\end{itemize}
+\end{enumerate}
+Este algoritmo es un proceso iterativo en el que el agente interactúa con el entorno y cambia sus estimaciones de Q, de esta forma creando una política o estrategia para maximizar las recompensas. Un equilibrio entre la exploración y la explotación es de gran importancia para asegurar que el agente conoce las mejores acciones a realizar sin atascarse en comportamientos subóptimos.

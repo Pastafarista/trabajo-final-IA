@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.1.11)  15 JAN 2024 12:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.1.11)  15 JAN 2024 12:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -344,7 +344,17 @@ File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__pdf_internal_box=\box57
 ) (out/main.aux
 (out/introduction.aux) (out/explication.aux) (out/reinforcement_learning.aux)
-(out/ia_pokemon.aux))
+(out/ia_pokemon.aux) (out/conclusiones.aux
+
+LaTeX Warning: Label `fig:turn' multiply defined.
+
+
+LaTeX Warning: Label `fig:turn' multiply defined.
+
+
+LaTeX Warning: Label `fig:turn' multiply defined.
+
+))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
@@ -365,8 +375,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
 LaTeX Font Info:    ... okay on input line 26.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 26.
 LaTeX Font Info:    ... okay on input line 26.
-
-(/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+ (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count293
 \scratchdimen=\dimen160
@@ -395,7 +404,7 @@ Package hyperref Info: Link coloring ON on input line 26.
 \openout3 = `main.out'.
 
 \c@lstlisting=\count299
-<figures/logo u-tad.png, id=76, 1204.5pt x 586.19pt>
+<figures/logo u-tad.png, id=84, 1204.5pt x 586.19pt>
 File: figures/logo u-tad.png Graphic file (type png)
 <use figures/logo u-tad.png>
 Package pdftex.def Info: figures/logo u-tad.png  used on input line 47.
@@ -444,12 +453,12 @@ Chapter 1.
 
  (./explication.tex
 Chapter 2.
-<figures/combat.jpg, id=125, 642.4pt x 481.8pt>
+<figures/combat.jpg, id=141, 642.4pt x 481.8pt>
 File: figures/combat.jpg Graphic file (type jpg)
 <use figures/combat.jpg>
 Package pdftex.def Info: figures/combat.jpg  used on input line 11.
 (pdftex.def)             Requested size: 172.5pt x 129.37462pt.
-<figures/pokemons.jpg, id=126, 1734.48pt x 1734.48pt>
+<figures/pokemons.jpg, id=142, 1734.48pt x 1734.48pt>
 File: figures/pokemons.jpg Graphic file (type jpg)
 <use figures/pokemons.jpg>
 Package pdftex.def Info: figures/pokemons.jpg  used on input line 21.
@@ -460,13 +469,13 @@ Package pdftex.def Info: figures/pokemons.jpg  used on input line 21.
 
 
  <./figures/combat.jpg>]
-<figures/chart.png, id=131, 843.15pt x 903.375pt>
+<figures/chart.png, id=147, 843.15pt x 903.375pt>
 File: figures/chart.png Graphic file (type png)
 <use figures/chart.png>
 Package pdftex.def Info: figures/chart.png  used on input line 31.
 (pdftex.def)             Requested size: 172.5pt x 184.82089pt.
  [5 <./figures/pokemons.jpg> <./figures/chart.png (PNG copy)>]
-<figures/hiperrayo.jpg, id=136, 250.9375pt x 188.705pt>
+<figures/hiperrayo.jpg, id=152, 250.9375pt x 188.705pt>
 File: figures/hiperrayo.jpg Graphic file (type jpg)
 <use figures/hiperrayo.jpg>
 Package pdftex.def Info: figures/hiperrayo.jpg  used on input line 41.
@@ -475,71 +484,92 @@ Package pdftex.def Info: figures/hiperrayo.jpg  used on input line 41.
 \openout2 = `reinforcement_learning.aux'.
 
  (./reinforcement_learning.tex
+Chapter 3.
 
-! LaTeX Error: Can be used only in preamble.
+Overfull \hbox (2.67459pt too wide) in paragraph at lines 7--7
+[]\OT1/cmr/bx/n/14.4 Reinforcement Learn-ing apli-cado a Pok^^Semon 
+ []
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1 \usepackage
-               {amsmath}
-? 
 [7
 
 
 
-]
-Chapter 3.
 
-Overfull \hbox (2.67459pt too wide) in paragraph at lines 8--8
-[]\OT1/cmr/bx/n/14.4 Reinforcement Learn-ing apli-cado a Pok^^Semon 
+]
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+
  []
 
-[8
 
-]
 Underfull \hbox (badness 10000) in paragraph at lines 28--29
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 29--30
-
- []
-
-[9{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]) [10]
+[8{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]) [9]
 \openout2 = `ia_pokemon.aux'.
 
 
 (./ia_pokemon.tex
 Chapter 4.
-[11
+[10
 
 
 
 
-] [12]
+] [11]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
 nput line 34.
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 3
 4.
  (/usr/share/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) [13{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}]) [14] (out/main.aux (
-out/introduction.aux) (out/explication.aux) (out/reinforcement_learning.aux) (o
-ut/ia_pokemon.aux))
+) [12{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}]) [13]
+\openout2 = `conclusiones.aux'.
+
+ (./conclusiones.tex
+Chapter 5.
+<figures/garchomp-vs-gyarados.png, id=265, 462.528pt x 346.896pt>
+File: figures/garchomp-vs-gyarados.png Graphic file (type png)
+<use figures/garchomp-vs-gyarados.png>
+Package pdftex.def Info: figures/garchomp-vs-gyarados.png  used on input line 8
+.
+(pdftex.def)             Requested size: 241.49895pt x 181.12799pt.
+<figures/stakataka-vs-keldeo.png, id=267, 462.528pt x 346.896pt>
+File: figures/stakataka-vs-keldeo.png Graphic file (type png)
+<use figures/stakataka-vs-keldeo.png>
+Package pdftex.def Info: figures/stakataka-vs-keldeo.png  used on input line 15
+.
+(pdftex.def)             Requested size: 241.49895pt x 181.12799pt.
+[14
+
+
+
+
+ <./figures/garchomp-vs-gyarados.png>]
+<figures/test_agente_global.jpeg, id=273, 907.39pt x 92.345pt>
+File: figures/test_agente_global.jpeg Graphic file (type jpg)
+<use figures/test_agente_global.jpeg>
+Package pdftex.def Info: figures/test_agente_global.jpeg  used on input line 26
+.
+(pdftex.def)             Requested size: 310.4979pt x 31.59837pt.
+) [15 <./figures/stakataka-vs-keldeo.png> <./figures/test_agente_global.jpeg>] 
+(out/main.aux (out/introduction.aux)
+(out/explication.aux) (out/reinforcement_learning.aux) (out/ia_pokemon.aux)
+(out/conclusiones.aux))
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 1A507405BF52E1F8410048237BF8EAFE;2121.
+(rerunfilecheck)             Checksum: 00595EFB9AF9AB79D6608C5E679F19A7;2388.
  ) 
 Here is how much of TeX's memory you used:
- 11839 strings out of 477985
- 180736 string characters out of 5840058
+ 11897 strings out of 477985
+ 182405 string characters out of 5840058
  2382388 words of memory out of 5000000
- 31737 multiletter control sequences out of 15000+600000
+ 31778 multiletter control sequences out of 15000+600000
  518081 words of font info for 54 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,6n,76p,852b,2179s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,7n,76p,852b,2179s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/publi
@@ -551,10 +581,10 @@ ublic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><
 /usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texm
 f-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on out/main.pdf (15 pages, 1057796 bytes).
+Output written on out/main.pdf (16 pages, 1178196 bytes).
 PDF statistics:
- 334 PDF objects out of 1000 (max. 8388607)
- 283 compressed objects within 3 object streams
- 106 named destinations out of 1000 (max. 500000)
- 170 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 363 PDF objects out of 1000 (max. 8388607)
+ 305 compressed objects within 4 object streams
+ 112 named destinations out of 1000 (max. 500000)
+ 201 words of extra memory for PDF output out of 10000 (max. 10000000)
 

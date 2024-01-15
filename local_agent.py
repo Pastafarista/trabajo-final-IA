@@ -234,6 +234,3 @@ def train(pokemon1:str, pokemon2:str, epochs:int) -> None:
 
 if __name__ == '__main__':
     train("raichu", "clawitzer", 1000)
-    
-
-

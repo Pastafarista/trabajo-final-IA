@@ -8,6 +8,90 @@ El entorno del que se ha hablado anteriormente tiene un rol de suma importancia 
 
 \section{Agente}
 
-El agente es la clase que comunica el entorno con el modelo de dos formas: con memoria corta, encargada del entrenamiento entre turno, y la memoria larga, la encargada del entrenamiento en base a todos los datos que se han ido recopilando a lo largo del entrenamiento. Para esto se usa una estructura de datos "deque" o "double ended queue", en español, cola doblemente terminada. En este trabajo, este tipo de cola resulta mas eficiente ya que permite realizar cambios a ambos lados de la cola mientras que las colas convencionales solo son manipulables por un extremo, y en este trabajo estamos constantemente accediendo a datos de ambos lados de la cola, uno cuando borramos elementos de la cola y otro para añadir nuevos. Con deque es posible hacer esto con una complejidad temporal de solo O(1) mientras que con una cola normal sería de O(n).
+El agente es la clase que comunica el entorno con el modelo de dos formas: con memoria corta, encargada del entrenamiento entre turno, y la memoria larga, la encargada del entrenamiento en base a todos los datos que se han ido recopilando a lo largo del entrenamiento. Para esto se usa una estructura de datos "deque" o "double ended queue", en español, cola doblemente terminada.
 
-En esta clase tambien tenemos una funcion vital para el funcionamiento de esta inteligencia artifial, get_state(env). Esta funcion traduce el estado del juego actual a numeros naturales para mandarselo a la red neuronal y que esta interprete la información.
+En este trabajo, este tipo de cola resulta mas eficiente ya que permite realizar cambios a ambos lados de la cola mientras que las colas convencionales solo son manipulables por un extremo, y en este trabajo estamos constantemente accediendo a datos de ambos lados de la cola, uno cuando borramos elementos de la cola y otro para añadir nuevos. Con deque es posible hacer esto con una complejidad temporal de solo O(1) mientras que con una cola normal sería de O(n).
+
+En esta clase tambien tenemos una funcion vital para el funcionamiento de esta inteligencia artifial, get_state(env). Esta funcion traduce el estado del juego actual a numeros naturales para mandarselo a la red neuronal y que esta interprete la información. En nuestro caso el estado es un array de numpy de enteros de 16 valores en los que se guardan el id de cada pokémon, los puntos de vida de cada pokemon y los 4 movimientos de cada uno en forma de id numerica. Como se ha utilizado una muestra reducida de los pokémon, con el id la IA puede hacerse a la idea de como es cada pokémon, pero con muestras más grandes habría que añadir más datos como pueden ser la velocidad, el tipo o la defensa de cada pokémon. Hemos implementado dos versiones del agente:
+
+\subsection{Agente local}
+
+El agente local está diseñado para entrenar un combate especifico, en los que los pokémons siempre son los mismos. De esta forma, conseguimos resultados óptimos en periodos de entrenamiento más cortos. La desventaja de este agente es que no se adapta bien a otros combates. 
+
+\subsection{Agente global}
+
+El agente global está diseñado para entrenar un combate genérico, en los que los pokémons pueden ser cualquiera de los disponibles en nuestra muestra. Al contrario que el agente local, la duración del entrenamiento es mayor ya que para que aprenda tiene que pasar por muchas más épocas y además los resultados son inferiores.
+
+\section{Modelo}
+
+El modelo es la red neuronal que se encarga de interpretar los datos que le llegan del agente y devolver una acción. En nuestro caso, el modelo es una red neuronal con una capa oculta lineal. El modelo tiene una capa de input de 12, que es igual al tamaño del estado del juego y la capa de salida es igual a 4 que son las acciones que cada jugador puede realizar por turno. Hemos decidido utilizar la libreria de pytorch en vez de keras, ya que hemos visto que entrena más rápido.
+
+\section{Entrenamiento}
+
+El entrenamiento de la IA se ha realizado en dos fases, la primera de ellas es el entrenamiento de la memoria corta, en la que se entrena el modelo con los datos del último turno, y la segunda es el entrenamiento de la memoria larga, en la que se entrena el modelo con todos los datos recopilados hasta el momento. En nuestra implementación, guardamos el modelo de cada jugador en el punto que mejor media de accurac
+y tiene en las últimas 100 partidas.
+
+\begin{lstlisting}[language=Python, caption=Entrenamiento de la IA]
+    def train(pokemon1:str, pokemon2:str, epochs:int) -> None:
+    agent = Agent()
+    env = Environment(pokemon1, pokemon2)
+    
+    # variables para el record
+    p1_wins = []
+    p2_wins = []
+    last_victories_p1 = 0
+    last_victories_p2 = 0
+
+    record_win_p1 = 0
+    record_win_p2 = 0
+    
+    while True:
+        # obtener estado antiguo
+        state_old = agent.get_state(env)
+
+        # obtener movimiento
+        final_moves = agent.get_action(state_old)
+
+        # traducir el movimiento [0, 0, 0, 1] -> 3
+        rewards, done, winner  = env.step(np.argmax(final_moves[0]), np.argmax(final_moves[1]))
+        state_new = agent.get_state(env)
+                
+        # entrenar al agente con el nuevo estado (short memory)
+        agent.train_short_memory(state=state_old, actions=final_moves, rewards=rewards, next_state=state_new, done=done)
+
+        # guardar en la memoria del agente el estado, la accion, la recompensa, el siguiente estado y si el juego ha terminado
+        agent.remember(state_old, final_moves, rewards, state_new, done)
+ 
+        if done:
+            # entrenar al agente con todos los estados (long memory), resetear el juego y actualizar el record
+            env = Environment(pokemon1, pokemon2)
+            agent.numero_partidas += 1
+            agent.train_long_memory()
+
+            if winner == 0:
+                last_victories_p1 += 1
+            elif winner == 1:
+                last_victories_p2 += 1
+
+            if(agent.numero_partidas % 100 == 0):
+                p1_wins.append(last_victories_p1 / 100)
+                p2_wins.append(last_victories_p2 / 100)
+
+                if record_win_p1 < p1_wins[-1]:
+                    record_win_p1 = p1_wins[-1]
+                    agent.model_p1.save(file_name=f"[{pokemon1}]-vs-{pokemon2}.pth")
+
+                if record_win_p2 < p2_wins[-1]:
+                    record_win_p2 = p2_wins[-1]
+                    agent.model_p2.save(file_name=f"{pokemon2}-vs-[{pokemon1}].pth")
+
+                last_victories_p1 = 0
+                last_victories_p2 = 0
+
+        if agent.numero_partidas == epochs:
+            break 
+\end{lstlisting}
+
+En la primera implementación del entrenamiento, el modelo entrenaba contra un bot aleatorio, pero en las versiones actuales del proyecto el agente tiene dos modelos de tal forma que ambos van aprendiendo a luchar entre ellos. En cuanto a los agentes, la diferencia entre el global y el local es que en el global los pokemons se cambian cada 100 partidas, para que así aprenda a luchar con diferentes oponentes.
+
+
